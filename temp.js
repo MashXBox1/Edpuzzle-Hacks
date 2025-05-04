@@ -1,1 +1,240 @@
-(function(_0x2c3df0,_0x162689){const _0x53bbf0=_0x5dd1,_0x5b3b07=_0x2c3df0();while(!![]){try{const _0x8be4b9=-parseInt(_0x53bbf0(0x1a1))/0x1*(-parseInt(_0x53bbf0(0x1c3))/0x2)+parseInt(_0x53bbf0(0x1b5))/0x3+parseInt(_0x53bbf0(0x1e7))/0x4*(parseInt(_0x53bbf0(0x1a8))/0x5)+parseInt(_0x53bbf0(0x1d2))/0x6+-parseInt(_0x53bbf0(0x1a5))/0x7*(-parseInt(_0x53bbf0(0x1d6))/0x8)+-parseInt(_0x53bbf0(0x1da))/0x9*(-parseInt(_0x53bbf0(0x1df))/0xa)+-parseInt(_0x53bbf0(0x1b8))/0xb;if(_0x8be4b9===_0x162689)break;else _0x5b3b07['push'](_0x5b3b07['shift']());}catch(_0x4257f4){_0x5b3b07['push'](_0x5b3b07['shift']());}}}(_0x4388,0x3d3b2),(async function(){const _0x506e39=_0x5dd1;function _0x4861d6(){const _0x5d8185=_0x5dd1;let _0x85e13=window[_0x5d8185(0x1e8)][_0x5d8185(0x19f)][_0x5d8185(0x1d5)](/\/assignments\/([a-f0-9]+)/)?.[0x1];if(!_0x85e13){_0x85e13=prompt('Enter\x20Edpuzzle\x20assignment\x20ID:');if(!_0x85e13)return null;}return _0x85e13;}function _0x16bf65(){const _0xa4c056=_0x5dd1;return{'token':_0xa4c056(0x1b1)};}async function _0x39926d(_0x48e3e6){const _0x465f0c=_0x5dd1;try{const _0x372d4e=await fetch(_0x465f0c(0x1a2)+_0x48e3e6,{'credentials':_0x465f0c(0x1ec)});if(!_0x372d4e['ok'])throw new Error(_0x465f0c(0x1bb)+_0x372d4e['status']+')');return await _0x372d4e[_0x465f0c(0x1ed)]();}catch(_0x18b9fa){return console[_0x465f0c(0x19b)](_0x465f0c(0x1b3),_0x18b9fa),null;}}async function _0xa537f(_0xea9bd0,_0x234357){const _0x35d74b=_0x5dd1;try{const _0x20d745=await fetch(_0x35d74b(0x1f9)+_0xea9bd0,{'headers':{'Authorization':_0x35d74b(0x1dd)+_0x234357,'Content-Type':_0x35d74b(0x1eb)},'credentials':_0x35d74b(0x1b9)});if(!_0x20d745['ok'])throw new Error(_0x35d74b(0x1ea)+_0x20d745[_0x35d74b(0x1be)]+')');return await _0x20d745[_0x35d74b(0x1ed)]();}catch(_0x16f260){return console[_0x35d74b(0x19b)](_0x35d74b(0x19d),_0x16f260),null;}}async function _0xf67303(_0x451f60,_0x203c91,_0x18d227=_0x506e39(0x1f1)){const _0x464c74=_0x506e39;try{_0x203c91[_0x464c74(0x1de)]=_0x464c74(0x1b2)+_0x18d227+_0x464c74(0x1a4);let _0x4cdff0;switch(_0x18d227){case _0x464c74(0x1f1):_0x4cdff0=await fetch(_0x464c74(0x1c1),{'method':_0x464c74(0x1d8),'headers':{'Content-Type':'application/json','Authorization':_0x464c74(0x1f2)},'body':JSON['stringify']({'input':_0x464c74(0x1f3)+_0x451f60,'max_new_tokens':0xc8,'temperature':0.7})});if(_0x4cdff0[_0x464c74(0x1be)]===0x1ad)throw new Error('DeepInfra\x20rate\x20limit\x20-\x20try\x20again\x20later');if(_0x4cdff0[_0x464c74(0x1be)]===0x193)throw new Error(_0x464c74(0x1ef));break;case _0x464c74(0x1cd):_0x4cdff0=await fetch(_0x464c74(0x19a),{'method':_0x464c74(0x1d8),'headers':{'Authorization':_0x464c74(0x1a7),'Content-Type':_0x464c74(0x1eb)},'body':JSON[_0x464c74(0x1c0)]({'inputs':_0x464c74(0x1b6)+_0x451f60,'parameters':{'max_new_tokens':0x96}})});break;case'pawan':_0x4cdff0=await fetch('https://api.pawan.krd/v1/chat/completions',{'method':'POST','headers':{'Content-Type':_0x464c74(0x1eb),'Authorization':_0x464c74(0x1db)},'body':JSON['stringify']({'model':'gpt-3.5-turbo','messages':[{'role':_0x464c74(0x1f5),'content':'Answer\x20this\x20Edpuzzle\x20question:\x20'+_0x451f60}],'max_tokens':0x96})});break;default:_0x4cdff0=await fetch(_0x464c74(0x1c8),{'method':'POST','headers':{'Content-Type':_0x464c74(0x1eb)},'body':JSON[_0x464c74(0x1c0)]({'model':_0x464c74(0x1ca),'messages':[{'role':'user','content':_0x464c74(0x1d9)+_0x451f60}]})});}const _0x24a884=await _0x4cdff0[_0x464c74(0x1ed)]();let _0xfe22bf;if(_0x18d227===_0x464c74(0x1f1))_0xfe22bf=_0x24a884['results']?.[0x0]?.[_0x464c74(0x1b7)]||_0x464c74(0x1e3);else _0x18d227===_0x464c74(0x1cd)?_0xfe22bf=_0x24a884[0x0]?.['generated_text']||'No\x20answer\x20generated':_0xfe22bf=_0x24a884['choices']?.[0x0]?.[_0x464c74(0x1b4)]?.['content']||_0x464c74(0x1e3);_0xfe22bf=_0xfe22bf[_0x464c74(0x1d0)](/Answer this Edpuzzle question.*?:/,'')['trim'](),_0x203c91[_0x464c74(0x1de)]=_0x464c74(0x1cc)+_0x18d227+'</strong>:\x20'+_0xfe22bf+'</div>';}catch(_0x170a7a){console['error'](_0x464c74(0x1c2)+_0x18d227+':',_0x170a7a);const _0x2bf490=['deepinfra',_0x464c74(0x1cd),_0x464c74(0x1c7),_0x464c74(0x1bf)],_0x51bf59=_0x2bf490[_0x2bf490[_0x464c74(0x1a3)](_0x18d227)+0x1];_0x51bf59?(_0x203c91[_0x464c74(0x1de)]=_0x464c74(0x1f7)+_0x170a7a[_0x464c74(0x1b4)]+'.\x20Retrying\x20with\x20'+_0x51bf59+_0x464c74(0x1a4),setTimeout(()=>_0xf67303(_0x451f60,_0x203c91,_0x51bf59),0x5dc)):_0x203c91['innerHTML']='<div\x20class=\x22ai-answer\x20error\x22>⚠\x20All\x20providers\x20failed.\x20Try\x20again\x20later.</div>';}}function _0x597617(_0x135ac3){const _0x3f77c6=_0x506e39;let _0x3f79df=_0x3f77c6(0x1c4);_0x135ac3[_0x3f77c6(0x1d4)]?.[_0x3f77c6(0x1f4)]((_0x474dc3,_0xe4597)=>{const _0x3a9086=_0x3f77c6,_0x4991b8=_0x474dc3[_0x3a9086(0x197)]?.[0x0]?.[_0x3a9086(0x1b0)]?.[_0x3a9086(0x1d0)](/<[^>]*>/g,'')||_0x3a9086(0x1fa),_0xfc2df2=_0x474dc3['time']?'(at\x20'+_0x474dc3[_0x3a9086(0x1cb)][_0x3a9086(0x1e2)](0x2)+'s)':'',_0x3ab420=_0x474dc3['choices']?.[_0x3a9086(0x1ee)](_0xbe588=>_0xbe588[_0x3a9086(0x1d3)])||[];_0x3f79df+='<div\x20class=\x22question-card\x22\x20id=\x22q'+_0xe4597+_0x3a9086(0x1f0)+(_0xe4597+0x1)+':\x20'+_0x4991b8+_0x3a9086(0x1dc)+_0xfc2df2+'</div>\x0a\x20\x20\x20\x20\x20\x20',_0x3ab420[_0x3a9086(0x1cf)]>0x0?_0x3ab420[_0x3a9086(0x1f4)](_0x426482=>{const _0x241879=_0x3a9086,_0x21b72e=_0x426482['body']?.[0x0]?.[_0x241879(0x1b0)]?.[_0x241879(0x1d0)](/<[^>]*>/g,'')||'No\x20answer\x20text';_0x3f79df+=_0x241879(0x1d1)+_0x21b72e+_0x241879(0x1f8);}):_0x3f79df+='<div\x20class=\x22no-answer\x22>⚠\x20Open-Ended\x20Question</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22provider-selector\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>AI\x20Provider:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<select\x20id=\x22provider'+_0xe4597+_0x3a9086(0x19c)+_0xe4597+'\x22>Generate\x20Answer</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ai-display\x22\x20id=\x22ai'+_0xe4597+'\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',_0x3f79df+=_0x3a9086(0x1f8);}),_0x3f79df+=_0x3f77c6(0x1f8);const _0x29cdb3=window[_0x3f77c6(0x1a0)]('',_0x3f77c6(0x1e5),'width=900,height=900,scrollbars=yes,resizable=yes');_0x29cdb3[_0x3f77c6(0x1a9)][_0x3f77c6(0x1ce)](_0x3f79df),_0x29cdb3[_0x3f77c6(0x1a9)][_0x3f77c6(0x1e1)]=_0x3f77c6(0x1e4),_0x29cdb3[_0x3f77c6(0x1a9)][_0x3f77c6(0x1c5)]('skipBtn')[_0x3f77c6(0x1ab)]=function(){const _0x2911a9=_0x3f77c6,_0x24c1ce=document['querySelector'](_0x2911a9(0x19e));if(_0x24c1ce)_0x24c1ce['currentTime']=_0x24c1ce[_0x2911a9(0x1e6)];const _0x416744=document[_0x2911a9(0x198)](_0x2911a9(0x1c6));if(_0x416744)_0x416744[_0x2911a9(0x1e9)]();},_0x29cdb3['document'][_0x3f77c6(0x1c5)](_0x3f77c6(0x1f6))[_0x3f77c6(0x1ab)]=function(){if(!_0x135ac3['questions'])return;const _0x1180b8=_0x2af6a0=>{const _0x32982d=_0x5dd1;if(_0x2af6a0>=_0x135ac3['questions'][_0x32982d(0x1cf)])return;const _0x3bfdf5=_0x135ac3[_0x32982d(0x1d4)][_0x2af6a0],_0x6dcd48=document[_0x32982d(0x1af)](_0x32982d(0x1ac))[_0x2af6a0];if(!_0x6dcd48)return setTimeout(()=>_0x1180b8(_0x2af6a0+0x1),0x3e8);const _0xbedca7=_0x3bfdf5[_0x32982d(0x1ad)]?.['filter'](_0x30f368=>_0x30f368[_0x32982d(0x1d3)])||[],_0x3df867=_0x6dcd48[_0x32982d(0x1af)](_0x32982d(0x1a6));_0xbedca7['forEach'](_0xe81133=>{const _0xff472b=_0x32982d,_0x16f822=_0x3bfdf5[_0xff472b(0x1ad)][_0xff472b(0x1a3)](_0xe81133);if(_0x3df867[_0x16f822])_0x3df867[_0x16f822][_0xff472b(0x1e9)]();});const _0x5d6dba=_0x6dcd48['querySelector']('.check-answer');_0x5d6dba?(_0x5d6dba[_0x32982d(0x1e9)](),setTimeout(()=>{const _0x1def0b=_0x32982d,_0x17875d=_0x6dcd48[_0x1def0b(0x198)](_0x1def0b(0x1c6))||document[_0x1def0b(0x198)]('.skip-btn');if(_0x17875d)_0x17875d[_0x1def0b(0x1e9)]();setTimeout(()=>_0x1180b8(_0x2af6a0+0x1),0x3e8);},0x3e8)):setTimeout(()=>_0x1180b8(_0x2af6a0+0x1),0x3e8);};_0x1180b8(0x0);},_0x29cdb3[_0x3f77c6(0x1a9)][_0x3f77c6(0x1af)]('.generate-answer-btn')[_0x3f77c6(0x1f4)](_0x495c07=>{_0x495c07['onclick']=function(){const _0x4381e5=_0x5dd1,_0x54d27c=_0x495c07[_0x4381e5(0x1e0)](_0x4381e5(0x1ba)),_0x53af6e=_0x135ac3[_0x4381e5(0x1d4)][_0x54d27c][_0x4381e5(0x197)]?.[0x0]?.[_0x4381e5(0x1b0)]?.['replace'](/<[^>]*>/g,'')||'',_0x10b108=_0x29cdb3[_0x4381e5(0x1a9)][_0x4381e5(0x1c5)]('ai'+_0x54d27c),_0x114b6c=_0x29cdb3[_0x4381e5(0x1a9)][_0x4381e5(0x1c5)](_0x4381e5(0x1bd)+_0x54d27c),_0x181219=_0x114b6c?_0x114b6c['value']:_0x4381e5(0x1f1);_0xf67303(_0x53af6e,_0x10b108,_0x181219);};}),_0x29cdb3['document'][_0x3f77c6(0x1ae)]();}async function _0x197981(){const _0x31cae6=_0x506e39,_0x48d334=_0x4861d6();if(!_0x48d334)return;try{const _0x15e82b=await _0x39926d(_0x48d334),_0x544a58=_0x15e82b?.['teacherAssignments']?.[0x0]?.[_0x31cae6(0x1d7)];if(!_0x544a58)throw new Error(_0x31cae6(0x1c9));const _0x6e9039=_0x16bf65(),_0x440036=await _0xa537f(_0x544a58,_0x6e9039[_0x31cae6(0x199)]);if(!_0x440036)throw new Error('Failed\x20to\x20fetch\x20questions');_0x597617(_0x440036);}catch(_0x37341a){alert(_0x31cae6(0x1bc)+_0x37341a['message']+_0x31cae6(0x1aa));}}_0x197981();}()));function _0x5dd1(_0x15e6ad,_0x58d178){const _0x43885f=_0x4388();return _0x5dd1=function(_0x5dd1aa,_0xad0b8a){_0x5dd1aa=_0x5dd1aa-0x197;let _0x911ecd=_0x43885f[_0x5dd1aa];return _0x911ecd;},_0x5dd1(_0x15e6ad,_0x58d178);}function _0x4388(){const _0x3b2556=['body','querySelector','token','https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1','error','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22deepinfra\x22\x20selected>DeepInfra\x20(Best)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22huggingface\x22>Hugging\x20Face</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22pawan\x22>Pawan</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22default\x22>Fallback</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22generate-answer-btn\x22\x20data-qid=\x22','Media\x20fetch\x20error:','video','pathname','open','6577BjmOSR','https://edpuzzle.com/api/v3/assignments/','indexOf','...</em>','10157jmvxet','.answer-item','Bearer\x20YOUR_HF_TOKEN_HERE','15005COrchM','document','\x0a\x0aCheck:\x0a-\x20Assignment\x20ID\x0a-\x20Token\x20validity\x0a-\x20Edpuzzle\x20page\x20context','onclick','.question-container','choices','close','querySelectorAll','html','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE2YzgwMmY4MTg1M2M5NDA2Y2RkZWUiLCJyb2xlIjoidGVhY2hlciIsInJlZ2lzdGVyZWRBdCI6MTc0NjMyMzQ1OCwiaXNBZG1pbiI6ZmFsc2UsImJlY29tZVRoaXNVc2VyIjpmYWxzZSwidXNlcklkQmVjb21pbmdUaGlzVXNlciI6IiIsImlzT3BlbkNsYXNzcm9vbVVzZXIiOmZhbHNlLCJpc0x0aVVzZXIiOmZhbHNlLCJpc1VzZXJVc2luZ1RoaXJkUGFydHlBcHBsaWNhdGlvbiI6ZmFsc2UsImlzT3JpZ2luYWxzU3R1ZGlvVXNlciI6ZmFsc2UsImlzSXRBZG1pblVzZXIiOmZhbHNlLCJsb2NhdGlvbiI6eyJjaXR5IjoiTWFuY2hlc3RlciIsInJlZ2lvbiI6IkNvbm5lY3RpY3V0IiwiY291bnRyeSI6IlVTIiwibGF0aXR1ZGUiOjQxLjc5NTgsImxvbmdpdHVkZSI6LTcyLjUyNDF9LCJpYXQiOjE3NDYzOTU4MjgsImV4cCI6MTc0NzAwMDYyOCwianRpIjoiNjgxN2UyYjRkNmMzZTFiNDhmMWQ4Zjc4In0.8YCPPaJz8H1IQAsJplH17Ny4Sae1JtzmbRBLNQgsDJ0','<em>Generating\x20answer\x20with\x20','Assignment\x20fetch\x20error:','message','767046dJAXRd','Answer\x20this\x20Edpuzzle\x20question:\x20','generated_text','13839683GFFYBi','omit','data-qid','Failed\x20to\x20fetch\x20assignment\x20(Status:\x20','Error:\x20','provider','status','default','stringify','https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1','Error\x20with\x20','38XunYgm','\x0a\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20body\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20linear-gradient(to\x20right,\x20#ffecd2,\x20#fcb69f);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20\x27Poppins\x27,\x20sans-serif;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.container\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x20900px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x2040px\x20auto;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2030px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#ffffffcc;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20backdrop-filter:\x20blur(8px);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x2010px\x2030px\x20rgba(0,0,0,0.15);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20h1\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#ff5722;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2030px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.controls\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20justify-content:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x2020px\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20flex-wrap:\x20wrap;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.controls\x20button\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#ff5722;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2012px\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2030px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20bold;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transition:\x20all\x200.3s;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20min-width:\x20150px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.controls\x20button:hover\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#e64a19;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateY(-2px);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.question-card\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-left:\x206px\x20solid\x20#00b894;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#fafafa;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2025px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x204px\x206px\x20rgba(0,0,0,0.1);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transition:\x20all\x200.3s;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.question-card:hover\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateY(-3px);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x206px\x2012px\x20rgba(0,0,0,0.15);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.question-text\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20bold;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2018px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#333;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.question-time\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2014px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#666;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.correct-answer\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#e8f5e9;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#2e7d32;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x208px\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-left:\x204px\x20solid\x20#4caf50;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.no-answer\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#c62828;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20bold;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#ffebee;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.generate-answer-btn\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#4CAF50;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x2010px\x205px\x205px\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transition:\x20all\x200.3s;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.generate-answer-btn:hover\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#388e3c;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateY(-2px);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.ai-answer\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#e3f2fd;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-left:\x206px\x20solid\x20#2196F3;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20animation:\x20fadeIn\x200.5s;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.ai-answer.error\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-left-color:\x20#f44336;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#ffebee;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.provider-selector\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x2015px\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20align-items:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.provider-selector\x20select\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x208px\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x201px\x20solid\x20#ddd;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2014px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20@keyframes\x20fadeIn\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20from\x20{\x20opacity:\x200;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20to\x20{\x20opacity:\x201;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20.status\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x2020px\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-style:\x20italic;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#666;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<h1>🚀\x20Edpuzzle\x20Answer\x20Assistant</h1>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22status\x22>Using\x20your\x20DeepInfra\x20API\x20key\x20for\x20best\x20results</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22controls\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20id=\x22skipBtn\x22>⏭\x20Skip\x20Video</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20id=\x22answerBtn\x22>🧠\x20Auto\x20Answer</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','getElementById','.skip-btn','pawan','https://chatgpt-api.shn.hk/v1/','Could\x20not\x20get\x20media\x20ID','gpt-3.5-turbo','time','<div\x20class=\x22ai-answer\x22>🤖\x20<strong>','huggingface','write','length','replace','<div\x20class=\x22correct-answer\x22>✔\x20','2477346ZCdBxF','isCorrect','questions','match','2152ubAhcW','contentId','POST','Answer\x20this:\x20','336087dpYQvk','Bearer\x20pk-this-is-a-free-free-key-6445d31b64a9407d8093c563a8ac9125','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22question-time\x22>','Bearer\x20','innerHTML','30bOrBau','getAttribute','title','toFixed','No\x20answer\x20generated','Edpuzzle\x20Answers','_blank','duration','284qycqre','location','click','Failed\x20to\x20fetch\x20media\x20(Status:\x20','application/json','include','json','filter','Invalid\x20API\x20key\x20-\x20check\x20your\x20DeepInfra\x20key','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22question-text\x22>Q','deepinfra','Bearer\x20x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl','Answer\x20this\x20Edpuzzle\x20question\x20concisely\x20and\x20accurately:\x20','forEach','user','answerBtn','<em>','</div>','https://edpuzzle.com/api/v3/media/','No\x20question\x20text'];_0x4388=function(){return _0x3b2556;};return _0x4388();}
+(async function () {
+  function _0x4861d6() {
+    let _0x85e13 = window.location.pathname.match(/\/assignments\/([a-f0-9]+)/)?.[0x1];
+    if (!_0x85e13) {
+      _0x85e13 = prompt("Enter Edpuzzle assignment ID:");
+      if (!_0x85e13) {
+        return null;
+      }
+    }
+    return _0x85e13;
+  }
+  async function _0x39926d(_0x48e3e6) {
+    try {
+      const _0x372d4e = await fetch("https://edpuzzle.com/api/v3/assignments/" + _0x48e3e6, {
+        'credentials': "include"
+      });
+      if (!_0x372d4e.ok) {
+        throw new Error("Failed to fetch assignment (Status: " + _0x372d4e.status + ')');
+      }
+      return await _0x372d4e.json();
+    } catch (_0x18b9fa) {
+      console.error("Assignment fetch error:", _0x18b9fa);
+      return null;
+    }
+  }
+  async function _0xa537f(_0xea9bd0, _0x234357) {
+    try {
+      const _0x20d745 = await fetch("https://edpuzzle.com/api/v3/media/" + _0xea9bd0, {
+        'headers': {
+          'Authorization': "Bearer " + _0x234357,
+          'Content-Type': "application/json"
+        },
+        'credentials': "omit"
+      });
+      if (!_0x20d745.ok) {
+        throw new Error("Failed to fetch media (Status: " + _0x20d745.status + ')');
+      }
+      return await _0x20d745.json();
+    } catch (_0x16f260) {
+      console.error("Media fetch error:", _0x16f260);
+      return null;
+    }
+  }
+  async function _0xf67303(_0x451f60, _0x203c91, _0x18d227 = "deepinfra") {
+    try {
+      _0x203c91.innerHTML = "<em>Generating answer with " + _0x18d227 + "...</em>";
+      let _0x4cdff0;
+      switch (_0x18d227) {
+        case "deepinfra":
+          _0x4cdff0 = await fetch("https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1", {
+            'method': "POST",
+            'headers': {
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl"
+            },
+            'body': JSON.stringify({
+              'input': "Answer this Edpuzzle question concisely and accurately: " + _0x451f60,
+              'max_new_tokens': 0xc8,
+              'temperature': 0.7
+            })
+          });
+          if (_0x4cdff0.status === 0x1ad) {
+            throw new Error("DeepInfra rate limit - try again later");
+          }
+          if (_0x4cdff0.status === 0x193) {
+            throw new Error("Invalid API key - check your DeepInfra key");
+          }
+          break;
+        case "huggingface":
+          _0x4cdff0 = await fetch("https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1", {
+            'method': "POST",
+            'headers': {
+              'Authorization': "Bearer YOUR_HF_TOKEN_HERE",
+              'Content-Type': "application/json"
+            },
+            'body': JSON.stringify({
+              'inputs': "Answer this Edpuzzle question: " + _0x451f60,
+              'parameters': {
+                'max_new_tokens': 0x96
+              }
+            })
+          });
+          break;
+        case 'pawan':
+          _0x4cdff0 = await fetch('https://api.pawan.krd/v1/chat/completions', {
+            'method': 'POST',
+            'headers': {
+              'Content-Type': "application/json",
+              'Authorization': "Bearer pk-this-is-a-free-free-key-6445d31b64a9407d8093c563a8ac9125"
+            },
+            'body': JSON.stringify({
+              'model': 'gpt-3.5-turbo',
+              'messages': [{
+                'role': "user",
+                'content': "Answer this Edpuzzle question: " + _0x451f60
+              }],
+              'max_tokens': 0x96
+            })
+          });
+          break;
+        default:
+          _0x4cdff0 = await fetch("https://chatgpt-api.shn.hk/v1/", {
+            'method': 'POST',
+            'headers': {
+              'Content-Type': "application/json"
+            },
+            'body': JSON.stringify({
+              'model': "gpt-3.5-turbo",
+              'messages': [{
+                'role': 'user',
+                'content': "Answer this: " + _0x451f60
+              }]
+            })
+          });
+      }
+      const _0x24a884 = await _0x4cdff0.json();
+      let _0xfe22bf;
+      if (_0x18d227 === "deepinfra") {
+        _0xfe22bf = _0x24a884.results?.[0x0]?.["generated_text"] || "No answer generated";
+      } else if (_0x18d227 === "huggingface") {
+        _0xfe22bf = _0x24a884[0x0]?.['generated_text'] || "No answer generated";
+      } else {
+        _0xfe22bf = _0x24a884.choices?.[0x0]?.["message"]?.['content'] || "No answer generated";
+      }
+      _0xfe22bf = _0xfe22bf.replace(/Answer this Edpuzzle question.*?:/, '').trim();
+      _0x203c91.innerHTML = "<div class=\"ai-answer\">🤖 <strong>" + _0x18d227 + "</strong>: " + _0xfe22bf + '</div>';
+    } catch (_0x170a7a) {
+      console.error("Error with " + _0x18d227 + ':', _0x170a7a);
+      const _0x2bf490 = ['deepinfra', "huggingface", "pawan", "default"];
+      const _0x51bf59 = _0x2bf490[_0x2bf490.indexOf(_0x18d227) + 0x1];
+      if (_0x51bf59) {
+        _0x203c91.innerHTML = "<em>" + _0x170a7a.message + ". Retrying with " + _0x51bf59 + "...</em>";
+        setTimeout(() => _0xf67303(_0x451f60, _0x203c91, _0x51bf59), 0x5dc);
+      } else {
+        _0x203c91.innerHTML = "<div class=\"ai-answer error\">⚠ All providers failed. Try again later.</div>";
+      }
+    }
+  }
+  function _0x597617(_0x135ac3) {
+    let _0x3f79df = "\n      <style>\n        body {\n          background: linear-gradient(to right, #ffecd2, #fcb69f);\n          font-family: 'Poppins', sans-serif;\n        }\n        .container {\n          max-width: 900px;\n          margin: 40px auto;\n          padding: 30px;\n          background: #ffffffcc;\n          backdrop-filter: blur(8px);\n          border-radius: 20px;\n          box-shadow: 0 10px 30px rgba(0,0,0,0.15);\n        }\n        h1 {\n          text-align: center;\n          color: #ff5722;\n          margin-bottom: 30px;\n        }\n        .controls {\n          display: flex;\n          justify-content: center;\n          gap: 20px;\n          margin: 20px 0;\n          flex-wrap: wrap;\n        }\n        .controls button {\n          background: #ff5722;\n          color: white;\n          border: none;\n          padding: 12px 20px;\n          border-radius: 30px;\n          font-weight: bold;\n          cursor: pointer;\n          transition: all 0.3s;\n          min-width: 150px;\n        }\n        .controls button:hover {\n          background: #e64a19;\n          transform: translateY(-2px);\n        }\n        .question-card {\n          border-left: 6px solid #00b894;\n          background: #fafafa;\n          padding: 20px;\n          border-radius: 15px;\n          margin-bottom: 25px;\n          box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n          transition: all 0.3s;\n        }\n        .question-card:hover {\n          transform: translateY(-3px);\n          box-shadow: 0 6px 12px rgba(0,0,0,0.15);\n        }\n        .question-text {\n          font-weight: bold;\n          font-size: 18px;\n          margin-bottom: 10px;\n          color: #333;\n        }\n        .question-time {\n          font-size: 14px;\n          color: #666;\n          margin-bottom: 15px;\n        }\n        .correct-answer {\n          background: #e8f5e9;\n          color: #2e7d32;\n          padding: 12px;\n          border-radius: 10px;\n          margin: 8px 0;\n          border-left: 4px solid #4caf50;\n        }\n        .no-answer {\n          color: #c62828;\n          font-weight: bold;\n          margin-bottom: 15px;\n          padding: 10px;\n          background: #ffebee;\n          border-radius: 8px;\n        }\n        .generate-answer-btn {\n          background: #4CAF50;\n          color: white;\n          padding: 10px 15px;\n          border-radius: 8px;\n          border: none;\n          cursor: pointer;\n          margin: 10px 5px 5px 0;\n          transition: all 0.3s;\n        }\n        .generate-answer-btn:hover {\n          background: #388e3c;\n          transform: translateY(-2px);\n        }\n        .ai-answer {\n          background: #e3f2fd;\n          border-left: 6px solid #2196F3;\n          padding: 15px;\n          margin-top: 15px;\n          border-radius: 8px;\n          animation: fadeIn 0.5s;\n        }\n        .ai-answer.error {\n          border-left-color: #f44336;\n          background: #ffebee;\n        }\n        .provider-selector {\n          margin: 15px 0;\n          display: flex;\n          align-items: center;\n          gap: 10px;\n        }\n        .provider-selector select {\n          padding: 8px 12px;\n          border-radius: 8px;\n          border: 1px solid #ddd;\n          background: white;\n          font-size: 14px;\n        }\n        @keyframes fadeIn {\n          from { opacity: 0; }\n          to { opacity: 1; }\n        }\n        .status {\n          text-align: center;\n          margin: 20px 0;\n          font-style: italic;\n          color: #666;\n        }\n      </style>\n      <div class=\"container\">\n        <h1>🚀 Edpuzzle Answer Assistant</h1>\n        <div class=\"status\">Using your DeepInfra API key for best results</div>\n        <div class=\"controls\">\n          <button id=\"skipBtn\">⏭ Skip Video</button>\n          <button id=\"answerBtn\">🧠 Auto Answer</button>\n        </div>\n    ";
+    _0x135ac3.questions?.["forEach"]((_0x474dc3, _0xe4597) => {
+      const _0x4991b8 = _0x474dc3.body?.[0x0]?.["html"]?.["replace"](/<[^>]*>/g, '') || "No question text";
+      const _0xfc2df2 = _0x474dc3.time ? "(at " + _0x474dc3.time.toFixed(0x2) + 's)' : '';
+      const _0x3ab420 = _0x474dc3.choices?.["filter"](_0xbe588 => _0xbe588.isCorrect) || [];
+      _0x3f79df += "<div class=\"question-card\" id=\"q" + _0xe4597 + "\">\n        <div class=\"question-text\">Q" + (_0xe4597 + 0x1) + ": " + _0x4991b8 + "</div>\n        <div class=\"question-time\">" + _0xfc2df2 + "</div>\n      ";
+      if (_0x3ab420.length > 0x0) {
+        _0x3ab420.forEach(_0x426482 => {
+          const _0x21b72e = _0x426482.body?.[0x0]?.["html"]?.["replace"](/<[^>]*>/g, '') || "No answer text";
+          _0x3f79df += "<div class=\"correct-answer\">✔ " + _0x21b72e + "</div>";
+        });
+      } else {
+        _0x3f79df += "<div class=\"no-answer\">⚠ Open-Ended Question</div>\n          <div class=\"provider-selector\">\n            <span>AI Provider:</span>\n            <select id=\"provider" + _0xe4597 + "\">\n              <option value=\"deepinfra\" selected>DeepInfra (Best)</option>\n              <option value=\"huggingface\">Hugging Face</option>\n              <option value=\"pawan\">Pawan</option>\n              <option value=\"default\">Fallback</option>\n            </select>\n          </div>\n          <button class=\"generate-answer-btn\" data-qid=\"" + _0xe4597 + "\">Generate Answer</button>\n          <div class=\"ai-display\" id=\"ai" + _0xe4597 + "\"></div>\n        ";
+      }
+      _0x3f79df += "</div>";
+    });
+    _0x3f79df += "</div>";
+    const _0x29cdb3 = window.open('', "_blank", 'width=900,height=900,scrollbars=yes,resizable=yes');
+    _0x29cdb3.document.write(_0x3f79df);
+    _0x29cdb3.document.title = "Edpuzzle Answers";
+    _0x29cdb3.document.getElementById('skipBtn').onclick = function () {
+      const _0x24c1ce = document.querySelector("video");
+      if (_0x24c1ce) {
+        _0x24c1ce.currentTime = _0x24c1ce.duration;
+      }
+      const _0x416744 = document.querySelector(".skip-btn");
+      if (_0x416744) {
+        _0x416744.click();
+      }
+    };
+    _0x29cdb3.document.getElementById("answerBtn").onclick = function () {
+      if (!_0x135ac3.questions) {
+        return;
+      }
+      const _0x1180b8 = _0x2af6a0 => {
+        if (_0x2af6a0 >= _0x135ac3.questions.length) {
+          return;
+        }
+        const _0x3bfdf5 = _0x135ac3.questions[_0x2af6a0];
+        const _0x6dcd48 = document.querySelectorAll(".question-container")[_0x2af6a0];
+        if (!_0x6dcd48) {
+          return setTimeout(() => _0x1180b8(_0x2af6a0 + 0x1), 0x3e8);
+        }
+        const _0xbedca7 = _0x3bfdf5.choices?.['filter'](_0x30f368 => _0x30f368.isCorrect) || [];
+        const _0x3df867 = _0x6dcd48.querySelectorAll(".answer-item");
+        _0xbedca7.forEach(_0xe81133 => {
+          const _0x16f822 = _0x3bfdf5.choices.indexOf(_0xe81133);
+          if (_0x3df867[_0x16f822]) {
+            _0x3df867[_0x16f822].click();
+          }
+        });
+        const _0x5d6dba = _0x6dcd48.querySelector('.check-answer');
+        if (_0x5d6dba) {
+          _0x5d6dba.click();
+          setTimeout(() => {
+            const _0x17875d = _0x6dcd48.querySelector(".skip-btn") || document.querySelector('.skip-btn');
+            if (_0x17875d) {
+              _0x17875d.click();
+            }
+            setTimeout(() => _0x1180b8(_0x2af6a0 + 0x1), 0x3e8);
+          }, 0x3e8);
+        } else {
+          setTimeout(() => _0x1180b8(_0x2af6a0 + 0x1), 0x3e8);
+        }
+      };
+      _0x1180b8(0x0);
+    };
+    _0x29cdb3.document.querySelectorAll('.generate-answer-btn').forEach(_0x495c07 => {
+      _0x495c07.onclick = function () {
+        const _0x54d27c = _0x495c07.getAttribute("data-qid");
+        const _0x53af6e = _0x135ac3.questions[_0x54d27c].body?.[0x0]?.["html"]?.['replace'](/<[^>]*>/g, '') || '';
+        const _0x10b108 = _0x29cdb3.document.getElementById('ai' + _0x54d27c);
+        const _0x114b6c = _0x29cdb3.document.getElementById("provider" + _0x54d27c);
+        const _0x181219 = _0x114b6c ? _0x114b6c.value : "deepinfra";
+        _0xf67303(_0x53af6e, _0x10b108, _0x181219);
+      };
+    });
+    _0x29cdb3.document.close();
+  }
+  async function _0x197981() {
+    const _0x48d334 = _0x4861d6();
+    if (!_0x48d334) {
+      return;
+    }
+    try {
+      const _0x15e82b = await _0x39926d(_0x48d334);
+      const _0x544a58 = _0x15e82b?.['teacherAssignments']?.[0x0]?.["contentId"];
+      if (!_0x544a58) {
+        throw new Error("Could not get media ID");
+      }
+      const _0x440036 = await _0xa537f(_0x544a58, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE2YzgwMmY4MTg1M2M5NDA2Y2RkZWUiLCJyb2xlIjoidGVhY2hlciIsInJlZ2lzdGVyZWRBdCI6MTc0NjMyMzQ1OCwiaXNBZG1pbiI6ZmFsc2UsImJlY29tZVRoaXNVc2VyIjpmYWxzZSwidXNlcklkQmVjb21pbmdUaGlzVXNlciI6IiIsImlzT3BlbkNsYXNzcm9vbVVzZXIiOmZhbHNlLCJpc0x0aVVzZXIiOmZhbHNlLCJpc1VzZXJVc2luZ1RoaXJkUGFydHlBcHBsaWNhdGlvbiI6ZmFsc2UsImlzT3JpZ2luYWxzU3R1ZGlvVXNlciI6ZmFsc2UsImlzSXRBZG1pblVzZXIiOmZhbHNlLCJsb2NhdGlvbiI6eyJjaXR5IjoiTWFuY2hlc3RlciIsInJlZ2lvbiI6IkNvbm5lY3RpY3V0IiwiY291bnRyeSI6IlVTIiwibGF0aXR1ZGUiOjQxLjc5NTgsImxvbmdpdHVkZSI6LTcyLjUyNDF9LCJpYXQiOjE3NDYzOTU4MjgsImV4cCI6MTc0NzAwMDYyOCwianRpIjoiNjgxN2UyYjRkNmMzZTFiNDhmMWQ4Zjc4In0.8YCPPaJz8H1IQAsJplH17Ny4Sae1JtzmbRBLNQgsDJ0");
+      if (!_0x440036) {
+        throw new Error("Failed to fetch questions");
+      }
+      _0x597617(_0x440036);
+    } catch (_0x37341a) {
+      alert("Error: " + _0x37341a.message + "\n\nCheck:\n- Assignment ID\n- Token validity\n- Edpuzzle page context");
+    }
+  }
+  _0x197981();
+})();
