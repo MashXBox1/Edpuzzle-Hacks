@@ -10,7 +10,7 @@
 
   function getCredentials() {
     return {
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZkNzRmNGM4NTFhOTc5YzVhYmM1ZWEiLCJyb2xlIjoidGVhY2hlciIsInJlZ2lzdGVyZWRBdCI6MTc0NDY2Mzc5NiwiaXNBZG1pbiI6ZmFsc2UsImJlY29tZVRoaXNVc2VyIjpmYWxzZSwidXNlcklkQmVjb21pbmdUaGlzVXNlciI6IiIsImlzT3BlbkNsYXNzcm9vbVVzZXIiOmZhbHNlLCJpc0x0aVVzZXIiOmZhbHNlLCJpc1VzZXJVc2luZ1RoaXJkUGFydHlBcHBsaWNhdGlvbiI6ZmFsc2UsImlzT3JpZ2luYWxzU3R1ZGlvVXNlciI6ZmFsc2UsImlzSXRBZG1pblVzZXIiOmZhbHNlLCJsb2NhdGlvbiI6eyJjaXR5IjoiTWFuY2hlc3RlciIsInJlZ2lvbiI6IkNvbm5lY3RpY3V0IiwiY291bnRyeSI6IlVTIiwibGF0aXR1ZGUiOjQxLjc5NTgsImxvbmdpdHVkZSI6LTcyLjUyNDF9LCJpYXQiOjE3NDYzNzk4NDgsImV4cCI6MTc0Njk4NDY0OCwianRpIjoiNjgxN2E0NDg1ZWVmYWNhYTRjZWQ2MjcxIn0.Bj4D1q9VHbkBGV4e9S3inaaT-D8ipSPtwt_Clv0btc0" // Replace with a valid teacher token
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZkNzRmNGM4NTFhOTc5YzVhYmM1ZWEiLCJyb2xlIjoidGVhY2hlciIsInJlZ2lzdGVyZWRBdCI6MTc0NDY2Mzc5NiwiaXNBZG1pbiI6ZmFsc2UsImJlY29tZVRoaXNVc2VyIjpmYWxzZSwidXNlcklkQmVjb21pbmdUaGlzVXNlciI6IiIsImlzT3BlbkNsYXNzcm9vbVVzZXIiOmZhbHNlLCJpc0x0aVVzZXIiOmZhbHNlLCJpc1VzZXJVc2luZ1RoaXJkUGFydHlBcHBsaWNhdGlvbiI6ZmFsc2UsImlzT3JpZ2luYWxzU3R1ZGlvVXNlciI6ZmFsc2UsImlzSXRBZG1pblVzZXIiOmZhbHNlLCJsb2NhdGlvbiI6eyJjaXR5IjoiTWFuY2hlc3RlciIsInJlZ2lvbiI6IkNvbm5lY3RpY3V0IiwiY291bnRyeSI6IlVTIiwibGF0aXR1ZGUiOjQxLjc5NTgsImxvbmdpdHVkZSI6LTcyLjUyNDF9LCJpYXQiOjE3NDYzNzk4NDgsImV4cCI6MTc0Njk4NDY0OCwianRpIjoiNjgxN2E0NDg1ZWVmYWNhYTRjZWQ2MjcxIn0.Bj4D1q9VHbkBGV4e9S3inaaT-D8ipSPtwt_Clv0btc0"
     };
   }
 
@@ -44,22 +44,93 @@
     }
   }
 
-  async function generateAIAnswer(questionText, displayEl) {
+  async function generateAIAnswer(questionText, displayEl, provider = 'deepinfra') {
     try {
-      displayEl.innerHTML = `<em>Generating answer...</em>`;
-      const response = await fetch('https://freeopenaiapi.sreejan.dev/v1/chat/completions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: [{ role: 'user', content: `Answer this Edpuzzle open-ended question: "${questionText}"` }]
-        })
-      });
+      displayEl.innerHTML = `<em>Generating answer with ${provider}...</em>`;
+      
+      let response;
+      switch (provider) {
+        case 'deepinfra':
+          // Using your DeepInfra API key
+          response = await fetch('https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1', {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl'
+            },
+            body: JSON.stringify({
+              input: `Answer this Edpuzzle question concisely and accurately: ${questionText}`,
+              max_new_tokens: 200,
+              temperature: 0.7
+            })
+          });
+          if (response.status === 429) throw new Error('DeepInfra rate limit - try again later');
+          if (response.status === 403) throw new Error('Invalid API key - check your DeepInfra key');
+          break;
+          
+        case 'huggingface':
+          response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1', {
+            method: 'POST',
+            headers: { 
+              'Authorization': 'Bearer YOUR_HF_TOKEN_HERE',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              inputs: `Answer this Edpuzzle question: ${questionText}`,
+              parameters: { max_new_tokens: 150 }
+            })
+          });
+          break;
+          
+        case 'pawan':
+          response = await fetch('https://api.pawan.krd/v1/chat/completions', {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer pk-this-is-a-free-free-key-6445d31b64a9407d8093c563a8ac9125'
+            },
+            body: JSON.stringify({
+              model: "gpt-3.5-turbo",
+              messages: [{ role: "user", content: `Answer this Edpuzzle question: ${questionText}` }],
+              max_tokens: 150
+            })
+          });
+          break;
+          
+        default:
+          response = await fetch('https://chatgpt-api.shn.hk/v1/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              model: "gpt-3.5-turbo",
+              messages: [{ role: "user", content: `Answer this: ${questionText}` }]
+            })
+          });
+      }
+      
       const data = await response.json();
-      const aiAnswer = data.choices?.[0]?.message?.content || 'Unable to generate answer.';
-      displayEl.innerHTML = `<div class="ai-answer">🤖 ${aiAnswer}</div>`;
+      let aiAnswer;
+      
+      if (provider === 'deepinfra') {
+        aiAnswer = data.results?.[0]?.generated_text || 'No answer generated';
+      } else if (provider === 'huggingface') {
+        aiAnswer = data[0]?.generated_text || 'No answer generated';
+      } else {
+        aiAnswer = data.choices?.[0]?.message?.content || 'No answer generated';
+      }
+      
+      aiAnswer = aiAnswer.replace(/Answer this Edpuzzle question.*?:/, '').trim();
+      displayEl.innerHTML = `<div class="ai-answer">🤖 <strong>${provider}</strong>: ${aiAnswer}</div>`;
     } catch (e) {
-      displayEl.innerHTML = `<div class="ai-answer error">⚠ Error generating answer.</div>`;
+      console.error(`Error with ${provider}:`, e);
+      const providers = ['deepinfra', 'huggingface', 'pawan', 'default'];
+      const nextProvider = providers[providers.indexOf(provider) + 1];
+      if (nextProvider) {
+        displayEl.innerHTML = `<em>${e.message}. Retrying with ${nextProvider}...</em>`;
+        setTimeout(() => generateAIAnswer(questionText, displayEl, nextProvider), 1500);
+      } else {
+        displayEl.innerHTML = `<div class="ai-answer error">⚠ All providers failed. Try again later.</div>`;
+      }
     }
   }
 
@@ -82,12 +153,14 @@
         h1 {
           text-align: center;
           color: #ff5722;
+          margin-bottom: 30px;
         }
         .controls {
           display: flex;
           justify-content: center;
           gap: 20px;
           margin: 20px 0;
+          flex-wrap: wrap;
         }
         .controls button {
           background: #ff5722;
@@ -97,37 +170,52 @@
           border-radius: 30px;
           font-weight: bold;
           cursor: pointer;
+          transition: all 0.3s;
+          min-width: 150px;
         }
         .controls button:hover {
           background: #e64a19;
+          transform: translateY(-2px);
         }
         .question-card {
           border-left: 6px solid #00b894;
           background: #fafafa;
-          padding: 15px 20px;
+          padding: 20px;
           border-radius: 15px;
-          margin-bottom: 20px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+          margin-bottom: 25px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          transition: all 0.3s;
+        }
+        .question-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
         .question-text {
           font-weight: bold;
+          font-size: 18px;
+          margin-bottom: 10px;
+          color: #333;
         }
         .question-time {
-          font-size: 13px;
-          color: #888;
-          margin-bottom: 10px;
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 15px;
         }
         .correct-answer {
-          background: #d1f5d3;
+          background: #e8f5e9;
           color: #2e7d32;
-          padding: 8px;
+          padding: 12px;
           border-radius: 10px;
-          margin: 5px 0;
+          margin: 8px 0;
+          border-left: 4px solid #4caf50;
         }
         .no-answer {
-          color: #c0392b;
+          color: #c62828;
           font-weight: bold;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
+          padding: 10px;
+          background: #ffebee;
+          border-radius: 8px;
         }
         .generate-answer-btn {
           background: #4CAF50;
@@ -136,21 +224,52 @@
           border-radius: 8px;
           border: none;
           cursor: pointer;
-          margin-top: 5px;
+          margin: 10px 5px 5px 0;
+          transition: all 0.3s;
         }
         .generate-answer-btn:hover {
           background: #388e3c;
+          transform: translateY(-2px);
         }
         .ai-answer {
-          background: #e7f3fe;
+          background: #e3f2fd;
           border-left: 6px solid #2196F3;
-          padding: 10px;
-          margin-top: 10px;
+          padding: 15px;
+          margin-top: 15px;
           border-radius: 8px;
+          animation: fadeIn 0.5s;
+        }
+        .ai-answer.error {
+          border-left-color: #f44336;
+          background: #ffebee;
+        }
+        .provider-selector {
+          margin: 15px 0;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .provider-selector select {
+          padding: 8px 12px;
+          border-radius: 8px;
+          border: 1px solid #ddd;
+          background: white;
+          font-size: 14px;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .status {
+          text-align: center;
+          margin: 20px 0;
+          font-style: italic;
+          color: #666;
         }
       </style>
       <div class="container">
         <h1>🚀 Edpuzzle Answer Assistant</h1>
+        <div class="status">Using your DeepInfra API key for best results</div>
         <div class="controls">
           <button id="skipBtn">⏭ Skip Video</button>
           <button id="answerBtn">🧠 Auto Answer</button>
@@ -173,7 +292,16 @@
           html += `<div class="correct-answer">✔ ${text}</div>`;
         });
       } else {
-        html += `<div class="no-answer">⚠ No correct answer found (Open-Ended)</div>
+        html += `<div class="no-answer">⚠ Open-Ended Question</div>
+          <div class="provider-selector">
+            <span>AI Provider:</span>
+            <select id="provider${i}">
+              <option value="deepinfra" selected>DeepInfra (Best)</option>
+              <option value="huggingface">Hugging Face</option>
+              <option value="pawan">Pawan</option>
+              <option value="default">Fallback</option>
+            </select>
+          </div>
           <button class="generate-answer-btn" data-qid="${i}">Generate Answer</button>
           <div class="ai-display" id="ai${i}"></div>
         `;
@@ -189,14 +317,14 @@
     popup.document.title = 'Edpuzzle Answers';
 
     // Event handlers
-    popup.document.getElementById('skipBtn').onclick = function () {
+    popup.document.getElementById('skipBtn').onclick = function() {
       const video = document.querySelector('video');
       if (video) video.currentTime = video.duration;
       const skipBtn = document.querySelector('.skip-btn');
       if (skipBtn) skipBtn.click();
     };
 
-    popup.document.getElementById('answerBtn').onclick = function () {
+    popup.document.getElementById('answerBtn').onclick = function() {
       if (!quizData.questions) return;
       const answerQuestion = (index) => {
         if (index >= quizData.questions.length) return;
@@ -227,11 +355,13 @@
     };
 
     popup.document.querySelectorAll('.generate-answer-btn').forEach(btn => {
-      btn.onclick = function () {
+      btn.onclick = function() {
         const qid = btn.getAttribute('data-qid');
         const questionText = quizData.questions[qid].body?.[0]?.html?.replace(/<[^>]*>/g, '') || '';
         const displayEl = popup.document.getElementById(`ai${qid}`);
-        generateAIAnswer(questionText, displayEl);
+        const providerSelect = popup.document.getElementById(`provider${qid}`);
+        const provider = providerSelect ? providerSelect.value : 'deepinfra';
+        generateAIAnswer(questionText, displayEl, provider);
       };
     });
 
