@@ -8,13 +8,13 @@ function getAssignmentId() {
 }
 
 function getCredentials() {
-  const email = prompt('Enter your Edpuzzle email:');
+  const email = "neel_ss@hotmail.com";
   if (!email) return null;
   
-  const password = prompt('Enter your Edpuzzle password:');
+  const password = "Rsmhw1234$$";
   if (!password) return null;
   
-  const token = prompt('Enter your Edpuzzle token (if available, otherwise leave blank):');
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZkNzRmNGM4NTFhOTc5YzVhYmM1ZWEiLCJyb2xlIjoidGVhY2hlciIsInJlZ2lzdGVyZWRBdCI6MTc0NDY2Mzc5NiwiaXNBZG1pbiI6ZmFsc2UsImJlY29tZVRoaXNVc2VyIjpmYWxzZSwidXNlcklkQmVjb21pbmdUaGlzVXNlciI6IiIsImlzT3BlbkNsYXNzcm9vbVVzZXIiOmZhbHNlLCJpc0x0aVVzZXIiOmZhbHNlLCJpc1VzZXJVc2luZ1RoaXJkUGFydHlBcHBsaWNhdGlvbiI6ZmFsc2UsImlzT3JpZ2luYWxzU3R1ZGlvVXNlciI6ZmFsc2UsImlzSXRBZG1pblVzZXIiOmZhbHNlLCJsb2NhdGlvbiI6eyJjaXR5IjoiTWFuY2hlc3RlciIsInJlZ2lvbiI6IkNvbm5lY3RpY3V0IiwiY291bnRyeSI6IlVTIiwibGF0aXR1ZGUiOjQxLjc5NTgsImxvbmdpdHVkZSI6LTcyLjUyNDF9LCJpYXQiOjE3NDYzMjM4NzEsImV4cCI6MTc0NjkyODY3MSwianRpIjoiNjgxNmM5OWZmMzdlMjJhMDFjOTg4ZDM1In0.rlAMoA8TyFrzr4BHuecRibU82rTBMbjjvpBc3d1ZMSw";
   
   return { email, password, token };
 }
