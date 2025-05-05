@@ -1,1 +1,217 @@
-{"user":{"id":"67fd74f4c851a979c5abc5ea","role":"teacher","name":"Neel Seshadri"},"description":{"blocks":[]},"transcoding":{"jobId":"6817adbada27820a5d176624","status":"finished"},"_id":"6817adba091950f59d47fe87","privacy":"public","privacyLimit":"public","originalOwner":"teacher","title":"Codio - Python Coding Project - Profile 1 - Microsoft_ Edge 2025-02-04 19-19-34","videoId":"6817adb723a5c522c57cf884","source":"edpuzzle","thumbnail":"https://d1b0qq1tctekzr.cloudfront.net/6817adb723a5c522c57cf884/static/medium/6817adb723a5c522c57cf884_0.jpg","channelId":"","originalVideoDuration":61.46,"sections":[{"type":"section","time":0,"duration":61.46,"_id":"6817adfa5eefacaa4cf21382"}],"voiceovers":[],"notes":[],"questions":[{"type":"multiple-choice","questionNumber":0,"time":0,"duration":0,"body":[{"text":"","html":"<p>Which is larger?</p>","_id":"6817ae1230d5f64f15a37523"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>5</p>","_id":"6817ae1230d5f64f15a37524"}],"feedback":[{"text":"","html":"","_id":"6817ae1230d5f64f15a37525"}],"isCorrect":false,"_id":"6817ae1230d5f64f15a37528"},{"choiceNumber":1,"body":[{"text":"","html":"<p>10</p>","_id":"6817ae1230d5f64f15a37526"}],"feedback":[{"text":"","html":"","_id":"6817ae1230d5f64f15a37527"}],"isCorrect":true,"_id":"6817ae1230d5f64f15a3752b"}],"createdBy":"user","_id":"6817ae1230d5f64f15a3752e"},{"type":"open-ended","questionNumber":0,"time":4.06,"duration":0,"body":[{"text":"","html":"<p>How did India gain independance?</p>","_id":"6817ae2423a5c522c57d2a8b"}],"feedback":[{"text":"","html":"","_id":"6817ae2423a5c522c57d2a8c"}],"idealAnswer":"","preferences":{"answerType":"text"},"createdBy":"user","_id":"6817ae2423a5c522c57d2a8d"},{"type":"multiple-choice","questionNumber":0,"time":7.46,"duration":0,"body":[{"text":"","html":"<p>Which of these are larger than 10?</p>","_id":"6817ae3ef650d49f5bb3bf95"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>11</p>","_id":"6817ae3ef650d49f5bb3bf96"}],"feedback":[{"text":"","html":"","_id":"6817ae3ef650d49f5bb3bf97"}],"isCorrect":true,"_id":"6817ae3ef650d49f5bb3bfa0"},{"choiceNumber":1,"body":[{"text":"","html":"<p>12</p>","_id":"6817ae3ef650d49f5bb3bf98"}],"feedback":[{"text":"","html":"","_id":"6817ae3ef650d49f5bb3bf99"}],"isCorrect":true,"_id":"6817ae3ef650d49f5bb3bfa3"},{"choiceNumber":2,"body":[{"text":"","html":"<p>6</p>","_id":"6817ae3ef650d49f5bb3bf9a"}],"feedback":[{"text":"","html":"","_id":"6817ae3ef650d49f5bb3bf9b"}],"isCorrect":false,"_id":"6817ae3ef650d49f5bb3bfa6"},{"choiceNumber":3,"body":[{"text":"","html":"<p>7</p>","_id":"6817ae3ef650d49f5bb3bf9c"}],"feedback":[{"text":"","html":"","_id":"6817ae3ef650d49f5bb3bf9d"}],"isCorrect":false,"_id":"6817ae3ef650d49f5bb3bfa9"},{"choiceNumber":4,"body":[{"text":"","html":"<p>8</p>","_id":"6817ae3ef650d49f5bb3bf9e"}],"feedback":[{"text":"","html":"","_id":"6817ae3ef650d49f5bb3bf9f"}],"isCorrect":false,"_id":"6817ae3ef650d49f5bb3bfac"}],"createdBy":"user","_id":"6817ae3ef650d49f5bb3bfaf"},{"type":"open-ended","questionNumber":0,"time":10.63,"duration":0,"body":[{"text":"","html":"<p>How do you say \"I like to play video games\" in spanish?</p>","_id":"6817ae572e86b1b903457863"}],"feedback":[{"text":"","html":"","_id":"6817ae572e86b1b903457864"}],"idealAnswer":"","preferences":{"answerType":"text"},"createdBy":"user","_id":"6817ae572e86b1b903457865"},{"type":"multiple-choice","questionNumber":0,"time":14.15,"duration":0,"body":[{"text":"","html":"<p>Best soccer player:</p>","_id":"6817ae6a170aaa64d643b52b"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>Messi</p>","_id":"6817ae6a170aaa64d643b52c"}],"feedback":[{"text":"","html":"","_id":"6817ae6a170aaa64d643b52d"}],"isCorrect":true,"_id":"6817ae6a170aaa64d643b530"},{"choiceNumber":1,"body":[{"text":"","html":"<p>Ronaldo</p>","_id":"6817ae6a170aaa64d643b52e"}],"feedback":[{"text":"","html":"","_id":"6817ae6a170aaa64d643b52f"}],"isCorrect":false,"_id":"6817ae6a170aaa64d643b533"}],"createdBy":"user","_id":"6817ae6a170aaa64d643b536"},{"type":"open-ended","questionNumber":0,"time":17.43,"duration":0,"body":[{"text":"","html":"<p>What does the 5th amendment say in the constitution of america?</p>","_id":"6817ae9007ce88d9a3cbecba"}],"feedback":[{"text":"","html":"","_id":"6817ae9007ce88d9a3cbecbb"}],"idealAnswer":"","preferences":{"answerType":"text"},"createdBy":"user","_id":"6817ae9007ce88d9a3cbecbc"},{"type":"multiple-choice","questionNumber":0,"time":21.54,"duration":0,"body":[{"text":"","html":"<p>Correct?</p>","_id":"6817ae9b2e86b1b903459691"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>Yes</p>","_id":"6817ae9b2e86b1b903459692"}],"feedback":[{"text":"","html":"","_id":"6817ae9b2e86b1b903459693"}],"isCorrect":true,"_id":"6817ae9b2e86b1b903459696"},{"choiceNumber":1,"body":[{"text":"","html":"<p>No</p>","_id":"6817ae9b2e86b1b903459694"}],"feedback":[{"text":"","html":"","_id":"6817ae9b2e86b1b903459695"}],"isCorrect":false,"_id":"6817ae9b2e86b1b903459699"}],"createdBy":"user","_id":"6817ae9b2e86b1b90345969c"},{"type":"open-ended","questionNumber":0,"time":25.41,"duration":0,"body":[{"text":"","html":"<p>what is 5+5?</p>","_id":"6817aea2667ef806f6010d26"}],"feedback":[{"text":"","html":"","_id":"6817aea2667ef806f6010d27"}],"idealAnswer":"","preferences":{"answerType":"text"},"createdBy":"user","_id":"6817aea2667ef806f6010d28"},{"type":"multiple-choice","questionNumber":0,"time":28.45,"duration":0,"body":[{"text":"","html":"<p>Very cool</p>","_id":"6817aeaaf0a0ef79bbbdd4b2"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>Yes</p>","_id":"6817aeaaf0a0ef79bbbdd4b3"}],"feedback":[{"text":"","html":"","_id":"6817aeaaf0a0ef79bbbdd4b4"}],"isCorrect":true,"_id":"6817aeaaf0a0ef79bbbdd4b7"},{"choiceNumber":1,"body":[{"text":"","html":"<p>No</p>","_id":"6817aeaaf0a0ef79bbbdd4b5"}],"feedback":[{"text":"","html":"","_id":"6817aeaaf0a0ef79bbbdd4b6"}],"isCorrect":false,"_id":"6817aeaaf0a0ef79bbbdd4ba"}],"createdBy":"user","_id":"6817aeaaf0a0ef79bbbdd4bd"},{"type":"multiple-choice","questionNumber":0,"time":32.56,"duration":0,"body":[{"text":"","html":"<p>Rate the fit?</p>","_id":"6817aebc2b1b4a4e07936a45"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>10/10</p>","_id":"6817aebc2b1b4a4e07936a46"}],"feedback":[{"text":"","html":"","_id":"6817aebc2b1b4a4e07936a47"}],"isCorrect":true,"_id":"6817aebc2b1b4a4e07936a4e"},{"choiceNumber":1,"body":[{"text":"","html":"<p>9/10</p>","_id":"6817aebc2b1b4a4e07936a48"}],"feedback":[{"text":"","html":"","_id":"6817aebc2b1b4a4e07936a49"}],"isCorrect":true,"_id":"6817aebc2b1b4a4e07936a51"},{"choiceNumber":2,"body":[{"text":"","html":"<p>No</p>","_id":"6817aebc2b1b4a4e07936a4a"}],"feedback":[{"text":"","html":"","_id":"6817aebc2b1b4a4e07936a4b"}],"isCorrect":false,"_id":"6817aebc2b1b4a4e07936a54"},{"choiceNumber":3,"body":[{"text":"","html":"<p>nuh uh</p>","_id":"6817aebc2b1b4a4e07936a4c"}],"feedback":[{"text":"","html":"","_id":"6817aebc2b1b4a4e07936a4d"}],"isCorrect":false,"_id":"6817aebc2b1b4a4e07936a57"}],"createdBy":"user","_id":"6817aebc2b1b4a4e07936a5a"},{"type":"multiple-choice","questionNumber":0,"time":36.31,"duration":0,"body":[{"text":"","html":"<p>Correct?</p>","_id":"6817aec9fc07eb1ffa8ce296"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>mhm</p>","_id":"6817aec9fc07eb1ffa8ce297"}],"feedback":[{"text":"","html":"","_id":"6817aec9fc07eb1ffa8ce298"}],"isCorrect":true,"_id":"6817aec9fc07eb1ffa8ce29b"},{"choiceNumber":1,"body":[{"text":"","html":"<p>nah</p>","_id":"6817aec9fc07eb1ffa8ce299"}],"feedback":[{"text":"","html":"","_id":"6817aec9fc07eb1ffa8ce29a"}],"isCorrect":false,"_id":"6817aec9fc07eb1ffa8ce29e"}],"createdBy":"user","_id":"6817aec9fc07eb1ffa8ce2a1"},{"type":"open-ended","questionNumber":0,"time":40.88,"duration":0,"body":[{"text":"","html":"<p>Que es el mas importante de los aztecas?</p>","_id":"6817aedbfc07eb1ffa8ceac7"}],"feedback":[{"text":"","html":"","_id":"6817aedbfc07eb1ffa8ceac8"}],"idealAnswer":"","preferences":{"answerType":"text"},"createdBy":"user","_id":"6817aedbfc07eb1ffa8ceac9"},{"type":"multiple-choice","questionNumber":0,"time":46.63,"duration":0,"body":[{"text":"","html":"<p>Doe</p>","_id":"6817aee457549ee2c5af7ebb"}],"choices":[{"choiceNumber":0,"body":[{"text":"","html":"<p>John</p>","_id":"6817aee457549ee2c5af7ebc"}],"feedback":[{"text":"","html":"","_id":"6817aee457549ee2c5af7ebd"}],"isCorrect":true,"_id":"6817aee457549ee2c5af7ec0"},{"choiceNumber":1,"body":[{"text":"","html":"<p>Jane</p>","_id":"6817aee457549ee2c5af7ebe"}],"feedback":[{"text":"","html":"","_id":"6817aee457549ee2c5af7ebf"}],"isCorrect":true,"_id":"6817aee457549ee2c5af7ec3"}],"createdBy":"user","_id":"6817aee457549ee2c5af7ec6"}],"isArchived":false,"teacherAssignments":["6817aeebfc07eb1ffa8cf59c"],"attachmentIds":[],"usedInPlaylists":0,"_archived":false,"updatedAt":"2025-05-04T18:16:11.053Z","createdAt":"2025-05-04T18:11:06.000Z","__v":0,"thumbnailURL":"/api/v3/videos/uploads/6817adb723a5c522c57cf884/thumbnail","videoDuration":61.46}
+javascript:(function(){
+  // Create main popup container
+  const popup = document.createElement('div');
+  popup.style = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    padding: 20px;
+    z-index: 999999;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
+  `;
+
+  // Close button
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = '×';
+  closeBtn.style = `
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  `;
+  closeBtn.onclick = () => document.body.removeChild(popup);
+  popup.appendChild(closeBtn);
+
+  // Get assignment ID from URL or prompt
+  const pathMatch = window.location.pathname.match(/\/assignments\/([a-f0-9]+)/);
+  const assignmentId = pathMatch ? pathMatch[1] : prompt('Enter Edpuzzle Assignment ID:');
+  if (!assignmentId) return;
+
+  // Show loading state
+  popup.innerHTML = `
+    <h2 style="color: #0078d7; margin-top: 0;">Edpuzzle Answer Generator</h2>
+    <div style="margin: 15px 0; color: #666;">Fetching assignment data...</div>
+  `;
+  document.body.appendChild(popup);
+
+  // First fetch assignment data to get media ID
+  fetch(`https://edpuzzle.com/api/v3/assignments/${assignmentId}`, {
+    credentials: 'include'
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Failed to fetch assignment');
+    return response.json();
+  })
+  .then(assignmentData => {
+    const mediaId = assignmentData?.teacherAssignments?.[0]?.contentId;
+    if (!mediaId) throw new Error('No media ID found in assignment');
+
+    // Show input form with media link
+    popup.innerHTML = `
+      <h2 style="color: #0078d7; margin-top: 0;">Edpuzzle Answer Generator</h2>
+      <div style="margin-bottom: 15px;">
+        <a href="https://edpuzzle.com/api/v3/media/${mediaId}" target="_blank" style="word-break: break-all; color: #0078d7;">
+          Media API: https://edpuzzle.com/api/v3/media/${mediaId}
+        </a>
+      </div>
+      <div style="margin-bottom: 10px; font-weight: bold;">Paste JSON Data:</div>
+      <textarea id="jsonInput" style="width: 100%; height: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: monospace; margin-bottom: 15px;"></textarea>
+      <button id="processBtn" style="width: 100%; padding: 12px; background: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+        Generate Answers
+      </button>
+      <div id="status" style="margin: 10px 0; color: #666;"></div>
+      <div id="results" style="display: none;"></div>
+    `;
+
+    // Process button click handler
+    document.getElementById('processBtn').onclick = function() {
+      try {
+        const jsonData = document.getElementById('jsonInput').value.trim();
+        if (!jsonData) throw new Error('Please paste the JSON data');
+
+        const mediaData = JSON.parse(jsonData);
+        if (!mediaData.questions) throw new Error('Invalid JSON - missing questions');
+
+        // Hide input, show results
+        document.getElementById('jsonInput').style.display = 'none';
+        document.getElementById('processBtn').style.display = 'none';
+        document.getElementById('status').style.display = 'none';
+        
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.style.display = 'block';
+        processQuestions(mediaData, resultsDiv);
+      } catch (error) {
+        document.getElementById('status').textContent = `Error: ${error.message}`;
+      }
+    };
+  })
+  .catch(error => {
+    popup.innerHTML = `
+      <h2 style="color: #0078d7; margin-top: 0;">Edpuzzle Answer Generator</h2>
+      <div style="color: #d32f2f; margin: 15px 0;">Error: ${error.message}</div>
+      <button onclick="document.body.removeChild(this.parentNode)" style="padding: 8px 15px; background: #f0f0f0; border: none; border-radius: 4px; cursor: pointer;">
+        Close
+      </button>
+    `;
+  });
+
+  // Your original question processing logic (modified for same-popup display)
+  function processQuestions(mediaData, container) {
+    // Add CSS
+    const css = `
+      .question-card {
+        border-left: 4px solid #0078d7;
+        background: #f9f9f9;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+      .question-text {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .correct-answer {
+        background: #e8f5e9;
+        padding: 8px;
+        border-radius: 4px;
+        margin: 5px 0;
+      }
+      .no-answer {
+        color: #d32f2f;
+        font-style: italic;
+      }
+      .generate-btn {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px 0;
+      }
+      .ai-answer {
+        background: #e3f2fd;
+        padding: 8px;
+        border-radius: 4px;
+        margin: 5px 0;
+        border-left: 3px solid #2196f3;
+      }
+    `;
+    const styleElem = document.createElement('style');
+    styleElem.textContent = css;
+    container.appendChild(styleElem);
+
+    // Process each question
+    mediaData.questions.forEach((question, index) => {
+      const questionCard = document.createElement('div');
+      questionCard.className = 'question-card';
+
+      const questionText = question.body?.[0]?.html?.replace(/<[^>]*>/g, '') || 'No question text';
+      const questionTime = question.time ? `(at ${question.time.toFixed(2)}s)` : '';
+
+      questionCard.innerHTML = `
+        <div class="question-text">Q${index + 1}: ${questionText} ${questionTime}</div>
+      `;
+
+      const correctAnswers = question.choices?.filter(choice => choice.isCorrect) || [];
+      if (correctAnswers.length > 0) {
+        correctAnswers.forEach(answer => {
+          const answerText = answer.body?.[0]?.html?.replace(/<[^>]*>/g, '') || 'No answer text';
+          questionCard.innerHTML += `
+            <div class="correct-answer">✔ ${answerText}</div>
+          `;
+        });
+      } else {
+        questionCard.innerHTML += `
+          <div class="no-answer">Open-ended question</div>
+          <button class="generate-btn" data-question="${encodeURIComponent(questionText)}">Generate AI Answer</button>
+          <div class="ai-answer" id="ai-${index}"></div>
+        `;
+      }
+
+      container.appendChild(questionCard);
+    });
+
+    // Add AI answer generation (using your original token)
+    container.querySelectorAll('.generate-btn').forEach(btn => {
+      btn.onclick = async function() {
+        const questionText = decodeURIComponent(this.getAttribute('data-question'));
+        const answerContainer = this.nextElementSibling;
+        answerContainer.innerHTML = 'Generating answer...';
+
+        try {
+          // Using your original DeepInfra token
+          const response = await fetch("https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1", {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: "Bearer x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl"
+            },
+            body: JSON.stringify({
+              input: "Answer this Edpuzzle question concisely and accurately: " + questionText,
+              max_new_tokens: 200,
+              temperature: 0.7
+            })
+          });
+          
+          const data = await response.json();
+          const answer = data.results?.[0]?.generated_text || "No answer generated";
+          answerContainer.innerHTML = `<strong>AI Answer:</strong> ${answer.replace(/Answer this Edpuzzle question.*?:/, '').trim()}`;
+        } catch (error) {
+          answerContainer.innerHTML = `<strong>Error:</strong> ${error.message}`;
+        }
+      };
+    });
+  }
+})();
