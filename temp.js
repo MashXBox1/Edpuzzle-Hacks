@@ -1,49 +1,115 @@
 javascript:(function(){
-  // Create main popup container
-  const popup = document.createElement('div');
-  popup.style = `
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 800px;
-    max-height: 90vh;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    padding: 20px;
-    z-index: 999999;
-    overflow-y: auto;
-    font-family: Arial, sans-serif;
-  `;
-
-  // Close button
-  const closeBtn = document.createElement('button');
-  closeBtn.textContent = '×';
-  closeBtn.style = `
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-  `;
-  closeBtn.onclick = () => document.body.removeChild(popup);
-  popup.appendChild(closeBtn);
-
   // Get assignment ID from URL or prompt
   const pathMatch = window.location.pathname.match(/\/assignments\/([a-f0-9]+)/);
   const assignmentId = pathMatch ? pathMatch[1] : prompt('Enter Edpuzzle Assignment ID:');
   if (!assignmentId) return;
 
-  // Show loading state
-  popup.innerHTML = `
-    <h2 style="color: #0078d7; margin-top: 0;">Edpuzzle Answer Generator</h2>
-    <div style="margin: 15px 0; color: #666;">Fetching assignment data...</div>
-  `;
-  document.body.appendChild(popup);
+  // Create new window
+  const popupWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+  popupWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Edpuzzle Answer Generator</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+          }
+          .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+          }
+          .media-link {
+            word-break: break-all;
+            color: #0078d7;
+            margin-bottom: 15px;
+          }
+          #jsonInput {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-bottom: 15px;
+          }
+          #processBtn {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 15px;
+          }
+          #status {
+            color: #666;
+            margin-bottom: 15px;
+          }
+          .question-card {
+            border-left: 4px solid #0078d7;
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+          }
+          .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+          .correct-answer {
+            background: #e8f5e9;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+          }
+          .no-answer {
+            color: #d32f2f;
+            font-style: italic;
+          }
+          .generate-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+          }
+          .ai-answer {
+            background: #e3f2fd;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+            border-left: 3px solid #2196f3;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h2>Edpuzzle Answer Generator</h2>
+          <button onclick="window.close()">×</button>
+        </div>
+        <div id="loading">Fetching assignment data...</div>
+        <div id="content" style="display: none;">
+          <a id="mediaLink" class="media-link" target="_blank"></a>
+          <div>Paste JSON Data:</div>
+          <textarea id="jsonInput" placeholder="Paste the full JSON data here..."></textarea>
+          <button id="processBtn">Generate Answers</button>
+          <div id="status"></div>
+          <div id="results"></div>
+        </div>
+      </body>
+    </html>
+  `);
 
   // First fetch assignment data to get media ID
   fetch(`https://edpuzzle.com/api/v3/assignments/${assignmentId}`, {
@@ -58,103 +124,47 @@ javascript:(function(){
     if (!mediaId) throw new Error('No media ID found in assignment');
 
     // Show input form with media link
-    popup.innerHTML = `
-      <h2 style="color: #0078d7; margin-top: 0;">Edpuzzle Answer Generator</h2>
-      <div style="margin-bottom: 15px;">
-        <a href="https://edpuzzle.com/api/v3/media/${mediaId}" target="_blank" style="word-break: break-all; color: #0078d7;">
-          Media API: https://edpuzzle.com/api/v3/media/${mediaId}
-        </a>
-      </div>
-      <div style="margin-bottom: 10px; font-weight: bold;">Paste JSON Data:</div>
-      <textarea id="jsonInput" style="width: 100%; height: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: monospace; margin-bottom: 15px;"></textarea>
-      <button id="processBtn" style="width: 100%; padding: 12px; background: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
-        Generate Answers
-      </button>
-      <div id="status" style="margin: 10px 0; color: #666;"></div>
-      <div id="results" style="display: none;"></div>
-    `;
+    popupWindow.document.getElementById('loading').style.display = 'none';
+    popupWindow.document.getElementById('content').style.display = 'block';
+    const mediaLink = popupWindow.document.getElementById('mediaLink');
+    mediaLink.href = `https://edpuzzle.com/api/v3/media/${mediaId}`;
+    mediaLink.textContent = `Media API: https://edpuzzle.com/api/v3/media/${mediaId}`;
 
     // Process button click handler
-    document.getElementById('processBtn').onclick = function() {
+    popupWindow.document.getElementById('processBtn').onclick = function() {
       try {
-        const jsonData = document.getElementById('jsonInput').value.trim();
+        const jsonData = popupWindow.document.getElementById('jsonInput').value.trim();
         if (!jsonData) throw new Error('Please paste the JSON data');
 
         const mediaData = JSON.parse(jsonData);
         if (!mediaData.questions) throw new Error('Invalid JSON - missing questions');
 
         // Hide input, show results
-        document.getElementById('jsonInput').style.display = 'none';
-        document.getElementById('processBtn').style.display = 'none';
-        document.getElementById('status').style.display = 'none';
+        popupWindow.document.getElementById('jsonInput').style.display = 'none';
+        popupWindow.document.getElementById('processBtn').style.display = 'none';
+        popupWindow.document.getElementById('status').style.display = 'none';
         
-        const resultsDiv = document.getElementById('results');
-        resultsDiv.style.display = 'block';
-        processQuestions(mediaData, resultsDiv);
+        const resultsDiv = popupWindow.document.getElementById('results');
+        processQuestions(mediaData, resultsDiv, popupWindow);
       } catch (error) {
-        document.getElementById('status').textContent = `Error: ${error.message}`;
+        popupWindow.document.getElementById('status').textContent = `Error: ${error.message}`;
       }
     };
   })
   .catch(error => {
-    popup.innerHTML = `
-      <h2 style="color: #0078d7; margin-top: 0;">Edpuzzle Answer Generator</h2>
-      <div style="color: #d32f2f; margin: 15px 0;">Error: ${error.message}</div>
-      <button onclick="document.body.removeChild(this.parentNode)" style="padding: 8px 15px; background: #f0f0f0; border: none; border-radius: 4px; cursor: pointer;">
+    popupWindow.document.getElementById('loading').innerHTML = `
+      <div style="color: #d32f2f;">Error: ${error.message}</div>
+      <button onclick="window.close()" style="padding: 8px 15px; margin-top: 10px; background: #f0f0f0; border: none; border-radius: 4px; cursor: pointer;">
         Close
       </button>
     `;
   });
 
-  // Your original question processing logic (modified for same-popup display)
-  function processQuestions(mediaData, container) {
-    // Add CSS
-    const css = `
-      .question-card {
-        border-left: 4px solid #0078d7;
-        background: #f9f9f9;
-        padding: 15px;
-        margin: 15px 0;
-        border-radius: 5px;
-      }
-      .question-text {
-        font-weight: bold;
-        margin-bottom: 10px;
-      }
-      .correct-answer {
-        background: #e8f5e9;
-        padding: 8px;
-        border-radius: 4px;
-        margin: 5px 0;
-      }
-      .no-answer {
-        color: #d32f2f;
-        font-style: italic;
-      }
-      .generate-btn {
-        background: #4caf50;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        margin: 5px 0;
-      }
-      .ai-answer {
-        background: #e3f2fd;
-        padding: 8px;
-        border-radius: 4px;
-        margin: 5px 0;
-        border-left: 3px solid #2196f3;
-      }
-    `;
-    const styleElem = document.createElement('style');
-    styleElem.textContent = css;
-    container.appendChild(styleElem);
-
+  // Question processing function
+  function processQuestions(mediaData, container, win) {
     // Process each question
     mediaData.questions.forEach((question, index) => {
-      const questionCard = document.createElement('div');
+      const questionCard = win.document.createElement('div');
       questionCard.className = 'question-card';
 
       const questionText = question.body?.[0]?.html?.replace(/<[^>]*>/g, '') || 'No question text';
@@ -183,7 +193,7 @@ javascript:(function(){
       container.appendChild(questionCard);
     });
 
-    // Add AI answer generation (using your original token)
+    // Add AI answer generation
     container.querySelectorAll('.generate-btn').forEach(btn => {
       btn.onclick = async function() {
         const questionText = decodeURIComponent(this.getAttribute('data-question'));
@@ -191,7 +201,7 @@ javascript:(function(){
         answerContainer.innerHTML = 'Generating answer...';
 
         try {
-          // Using your original DeepInfra token
+          // Using DeepInfra API
           const response = await fetch("https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1", {
             method: "POST",
             headers: {
