@@ -75,21 +75,32 @@ javascript:(function(){
             color: #d32f2f;
             font-style: italic;
           }
-          .generate-btn {
-            background: #4caf50;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 5px 0;
-          }
           .ai-answer {
             background: #e3f2fd;
             padding: 8px;
             border-radius: 4px;
             margin: 5px 0;
             border-left: 3px solid #2196f3;
+          }
+          .timestamp {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+          }
+          .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+          }
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
         </style>
       </head>
@@ -131,7 +142,7 @@ javascript:(function(){
     mediaLink.textContent = `Media API: https://edpuzzle.com/api/v3/media/${mediaId}`;
 
     // Process button click handler
-    popupWindow.document.getElementById('processBtn').onclick = function() {
+    popupWindow.document.getElementById('processBtn').onclick = async function() {
       try {
         const jsonData = popupWindow.document.getElementById('jsonInput').value.trim();
         if (!jsonData) throw new Error('Please paste the JSON data');
@@ -145,7 +156,7 @@ javascript:(function(){
         popupWindow.document.getElementById('status').style.display = 'none';
         
         const resultsDiv = popupWindow.document.getElementById('results');
-        processQuestions(mediaData, resultsDiv, popupWindow);
+        await processQuestions(mediaData, resultsDiv, popupWindow);
       } catch (error) {
         popupWindow.document.getElementById('status').textContent = `Error: ${error.message}`;
       }
@@ -161,17 +172,25 @@ javascript:(function(){
   });
 
   // Question processing function
-  function processQuestions(mediaData, container, win) {
-    // Process each question
-    mediaData.questions.forEach((question, index) => {
+  async function processQuestions(mediaData, container, win) {
+    // Sort questions by timestamp (earliest first)
+    const sortedQuestions = [...mediaData.questions].sort((a, b) => {
+      const timeA = a.time || 0;
+      const timeB = b.time || 0;
+      return timeA - timeB;
+    });
+
+    // Process each question in sorted order
+    for (const [index, question] of sortedQuestions.entries()) {
       const questionCard = win.document.createElement('div');
       questionCard.className = 'question-card';
 
       const questionText = question.body?.[0]?.html?.replace(/<[^>]*>/g, '') || 'No question text';
-      const questionTime = question.time ? `(at ${question.time.toFixed(2)}s)` : '';
+      const questionTime = question.time ? formatTime(question.time) : '';
 
       questionCard.innerHTML = `
-        <div class="question-text">Q${index + 1}: ${questionText} ${questionTime}</div>
+        <div class="timestamp">Timestamp: ${questionTime}</div>
+        <div class="question-text">Q${index + 1}: ${questionText}</div>
       `;
 
       const correctAnswers = question.choices?.filter(choice => choice.isCorrect) || [];
@@ -183,45 +202,68 @@ javascript:(function(){
           `;
         });
       } else {
+        // Add loading indicator for AI answer
         questionCard.innerHTML += `
           <div class="no-answer">Open-ended question</div>
-          <button class="generate-btn" data-question="${encodeURIComponent(questionText)}">Generate AI Answer</button>
-          <div class="ai-answer" id="ai-${index}"></div>
+          <div class="ai-answer" id="ai-${index}">
+            <div class="loading-spinner"></div> Generating answer...
+          </div>
         `;
       }
 
       container.appendChild(questionCard);
-    });
 
-    // Add AI answer generation
-    container.querySelectorAll('.generate-btn').forEach(btn => {
-      btn.onclick = async function() {
-        const questionText = decodeURIComponent(this.getAttribute('data-question'));
-        const answerContainer = this.nextElementSibling;
-        answerContainer.innerHTML = 'Generating answer...';
+      // Automatically generate AI answer for open-ended questions
+      if (correctAnswers.length === 0) {
+        await generateAIAnswer(questionText, win.document.getElementById(`ai-${index}`));
+      }
+    }
+  }
 
-        try {
-          // Using DeepInfra API
-          const response = await fetch("https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1", {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: "Bearer x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl"
-            },
-            body: JSON.stringify({
-              input: "Answer this Edpuzzle question concisely and accurately: " + questionText,
-              max_new_tokens: 200,
-              temperature: 0.7
-            })
-          });
-          
-          const data = await response.json();
-          const answer = data.results?.[0]?.generated_text || "No answer generated";
-          answerContainer.innerHTML = `<strong>AI Answer:</strong> ${answer.replace(/Answer this Edpuzzle question.*?:/, '').trim()}`;
-        } catch (error) {
-          answerContainer.innerHTML = `<strong>Error:</strong> ${error.message}`;
-        }
-      };
-    });
+  // AI answer generation function
+  async function generateAIAnswer(questionText, answerContainer) {
+    try {
+      // Detect if question is in Spanish
+      const isSpanish = /[ÁÉÍÓÚáéíóúñÑ]/.test(questionText);
+      const prompt = isSpanish 
+        ? `Responde esta pregunta de Edpuzzle en español: ${questionText}`
+        : `Answer this Edpuzzle question for me: ${questionText}`;
+
+      // Using DeepInfra API
+      const response = await fetch("https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: "Bearer x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl"
+        },
+        body: JSON.stringify({
+          input: prompt,
+          max_new_tokens: 200,
+          temperature: 0.7
+        })
+      });
+      
+      const data = await response.json();
+      const answer = data.results?.[0]?.generated_text || "No answer generated";
+      
+      // Clean up the response
+      let cleanAnswer = answer;
+      if (isSpanish) {
+        cleanAnswer = answer.replace(/Responde esta pregunta de Edpuzzle en español:.*?/, '').trim();
+      } else {
+        cleanAnswer = answer.replace(/Answer this Edpuzzle question for me:.*?/, '').trim();
+      }
+      
+      answerContainer.innerHTML = `<strong>${isSpanish ? 'Respuesta IA:' : 'AI Answer:'}</strong> ${cleanAnswer}`;
+    } catch (error) {
+      answerContainer.innerHTML = `<strong>Error:</strong> ${error.message}`;
+    }
+  }
+
+  // Helper function to format time (seconds to MM:SS format)
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
 })();
