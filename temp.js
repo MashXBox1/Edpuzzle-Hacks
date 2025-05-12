@@ -576,21 +576,25 @@ javascript:(function(){
                   ? \`Pregunta original: "\${this.questionText}". Pregunta de seguimiento: "\${message}". Responde en español.\`
                   : \`Original question: "\${this.questionText}". Follow-up: "\${message}". Answer in the same language as the follow-up.\`;
                 
-                const response = await fetch("https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1", {
+                const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                   method: "POST",
                   headers: {
                     'Content-Type': 'application/json',
-                    Authorization: "Bearer x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl"
+                    'Authorization': 'Bearer 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'
                   },
                   body: JSON.stringify({
-                    input: prompt,
-                    max_new_tokens: 300,
-                    temperature: 0.7
+                    model: "llama3-70b-8192",
+                    messages: [{
+                      role: "user",
+                      content: prompt
+                    }],
+                    temperature: 0.7,
+                    max_tokens: 1024
                   })
                 });
                 
                 const data = await response.json();
-                return data.results?.[0]?.generated_text || "I couldn't generate a response. Please try again.";
+                return data.choices?.[0]?.message?.content || "I couldn't generate a response. Please try again.";
               }
             }
 
@@ -657,22 +661,26 @@ javascript:(function(){
                   ? \`Responde esta pregunta de Edpuzzle en español: \${questionText}\`
                   : \`Answer this Edpuzzle question for me: \${questionText}\`;
 
-                // Using DeepInfra API
-                const response = await fetch("https://api.deepinfra.com/v1/inference/mistralai/Mistral-7B-Instruct-v0.1", {
+                // Using Groq API with Llama 3 model
+                const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                   method: "POST",
                   headers: {
                     'Content-Type': 'application/json',
-                    Authorization: "Bearer x8i4xUCxtNs4EZMMiO2ifmyxnxZD8WYl"
+                    'Authorization': 'Bearer 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'
                   },
                   body: JSON.stringify({
-                    input: prompt,
-                    max_new_tokens: 250,
-                    temperature: 0.7
+                    model: "llama3-70b-8192",
+                    messages: [{
+                      role: "user",
+                      content: prompt
+                    }],
+                    temperature: 0.7,
+                    max_tokens: 1024
                   })
                 });
                 
                 const data = await response.json();
-                let answer = data.results?.[0]?.generated_text || "No answer generated";
+                let answer = data.choices?.[0]?.message?.content || "No answer generated";
                 
                 // Clean up the response
                 if (isSpanish) {
