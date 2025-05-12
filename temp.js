@@ -327,7 +327,7 @@ javascript:(function(){
         <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
         <script>
           // Initialize particles.js
-          document.addEventListener('DOMContentLoaded', function() {
+          document.addEventListener('DOMContentLoaded', async function() {
             if (typeof particlesJS === 'function') {
               particlesJS("particles-js", {
                 "particles": {
@@ -348,6 +348,19 @@ javascript:(function(){
                   }
                 }
               });
+            }
+
+            // Fetch Groq API key
+            let groqApiKey = '';
+            try {
+              const response = await fetch('https://groqkey4edpuz.neelseshadri31.workers.dev/');
+              if (response.ok) {
+                groqApiKey = await response.text();
+              } else {
+                console.error('Failed to fetch Groq API key');
+              }
+            } catch (error) {
+              console.error('Error fetching Groq API key:', error);
             }
 
             // Fetch media link immediately when popup loads
@@ -388,9 +401,6 @@ javascript:(function(){
             // Call it immediately
             fetchMediaLink();
 
-            /* ALL ORIGINAL FUNCTIONALITY REMAINS THE SAME */
-            /* Only UI has been changed - functions below are unchanged */
-            
             // Auto Answers functionality
             class AutoAnswers {
               static async submitAnswers(questions) {
@@ -571,6 +581,8 @@ javascript:(function(){
               }
               
               async getAIResponse(message) {
+                if (!groqApiKey) return "Error: API key not loaded";
+                
                 const isSpanish = /[ÁÉÍÓÚáéíóúñÑ]/.test(message);
                 const prompt = isSpanish 
                   ? \`Pregunta original: "\${this.questionText}". Pregunta de seguimiento: "\${message}". Responde en español.\`
@@ -580,7 +592,7 @@ javascript:(function(){
                   method: "POST",
                   headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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'
+                    'Authorization': \`Bearer \${groqApiKey}\`
                   },
                   body: JSON.stringify({
                     model: "llama3-70b-8192",
@@ -655,6 +667,11 @@ javascript:(function(){
             // AI answer generation function
             async function generateAIAnswer(questionText, answerContainer) {
               try {
+                if (!groqApiKey) {
+                  answerContainer.innerHTML = '<div class="answer-bubble" style="border-left-color: #f87171;"><strong>Error:</strong> API key not loaded</div>';
+                  return;
+                }
+
                 // Detect if question is in Spanish
                 const isSpanish = /[ÁÉÍÓÚáéíóúñÑ]/.test(questionText);
                 const prompt = isSpanish 
@@ -666,7 +683,7 @@ javascript:(function(){
                   method: "POST",
                   headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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'
+                    'Authorization': \`Bearer \${groqApiKey}\`
                   },
                   body: JSON.stringify({
                     model: "llama3-70b-8192",
