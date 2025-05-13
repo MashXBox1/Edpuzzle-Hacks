@@ -383,8 +383,8 @@ javascript:(function(){
                 
                 const mediaLink = document.getElementById('mediaLink');
                 if (mediaLink) {
-                  mediaLink.href = 'https://edpuzzle.com/api/v3/media/' + mediaId;
-                  mediaLink.textContent = 'https://edpuzzle.com/api/v3/media/' + mediaId;
+                  mediaLink.href = 'https://edpuzzle-login.neelseshadri31.workers.dev/api/v3/media/' + mediaId;
+                  mediaLink.textContent = 'https://edpuzzle-login.neelseshadri31.workers.dev/api/v3/media/' + mediaId;
                 }
                 
                 return mediaId;
