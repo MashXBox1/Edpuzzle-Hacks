@@ -11,3 +11,5 @@ Copy this code to your bookmarks:
 ```javascript
 javascript:(()=>{fetch('https://raw.githubusercontent.com/Neelmans/ddedededededed/refs/heads/main/temp.js').then(r=>r.text()).then(eval);})();
 
+sd
+
