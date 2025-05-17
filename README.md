@@ -26,4 +26,4 @@ I will NOT responsible for any consequences that occur as of using this code. Th
 * Do not abuse AI answers. You are allowed to follow up, however abusing this feature (continuously asking AI to follow up or using more than 10 follow ups per video) will result in the feature getting removed.
 * Auto answer only works with mutliple choice. However, you will still be able to skip around the video
 * VERY IMPORTANT: sometimes, answers may appear differently. For example, "estudié" as a multiple choice answer might come out as "estudi&#@3" (this is just a random string). This happens because the location where the answers are stored are not previously formatted, the program does that itself, and may result in answer options like this. Auto answer will still work, even if answers looks like this. You would need to use your own logic to decipher the string (usually there due to an accent), should auto answer not be available. 
-
+* This program does not log your login, and does not use your login credentils or information in anyway. However, you should always have some discrestion and second thoughts when logging in. 
