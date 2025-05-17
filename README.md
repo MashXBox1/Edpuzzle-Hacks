@@ -6,10 +6,15 @@ Sign in with a Teacher Account. If you do not have one, make one using the steps
 Once you have successfully signed in, you're done! All you need to do now is use the bookmarklet to get your answers!
 ## Bookmarklet
 
-Copy this code to your bookmarks:
+Copy this code and make a bookmarklet:
 
 ```javascript
 javascript:(()=>{fetch('https://raw.githubusercontent.com/Neelmans/ddedededededed/refs/heads/main/temp.js').then(r=>r.text()).then(eval);})();
+```
+# How to make a Teacher account
+* Go to [https://edpuzzlefetch.edpuzzledestroyer.workers.dev/login](https://edpuzzle.com/signup). Copy this link and paste it into your web broswer
+* Select 'I'm a Teacher' 
 
-sd
+
+
 
