@@ -9,7 +9,7 @@ Once you have successfully signed in, you're done! All you need to do now is use
 Copy this code and make a bookmarklet:
 
 ```javascript
-javascript:(()=>{fetch('https://raw.githubusercontent.com/Neelmans/ddedededededed/refs/heads/main/temp.js').then(r=>r.text()).then(eval);})();
+javascript:(()=>{fetch('https://raw.githubusercontent.com/MashXBox1/ddedededededed/refs/heads/main/temp.js').then(r=>r.text()).then(eval);})();
 ```
 # How to make a Teacher account
 * Go to https://edpuzzle.com/signup. Copy this link and paste it into your web broswer
