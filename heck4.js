@@ -33,16 +33,12 @@
 
     // Step 4: Fetch data from the second API endpoint (to get the questions and answers)
     const apiEndpoint2 = `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
-
-    // Custom fetch logic to explicitly use edpuzzlefetch cookies and omit browser cookies
     const response2 = await fetch(apiEndpoint2, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            // Add custom headers if needed (e.g., Authorization tokens)
-            // 'Authorization': 'Bearer YOUR_TOKEN_HERE'
         },
-        credentials: 'omit', // Omit browser cookies entirely
+        credentials: 'include', // Include HTTP-only cookies for edpuzzlefetch
         mode: 'cors', // Ensure cross-origin requests are allowed
     });
 
