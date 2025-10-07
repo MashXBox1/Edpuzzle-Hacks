@@ -1,253 +1,378 @@
 (async () => {
-    // Step 1: Extract assignmentId and attachmentId from the current window URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const assignmentId = window.location.pathname.split('/assignments/')[1]?.split('/')[0];
-    const attachmentId = urlParams.get('attachmentId');
+  // --- helpers ---
+  function formatTime(seconds) {
+    if (typeof seconds !== 'number') return '';
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
 
-    if (!assignmentId || !attachmentId) {
-        alert('Unable to extract assignmentId or attachmentId from the URL.');
-        return;
+  // Extract IDs
+  const urlParams = new URLSearchParams(window.location.search);
+  const assignmentId = window.location.pathname.split('/assignments/')[1]?.split('/')[0];
+  const attachmentId = urlParams.get('attachmentId');
+  if (!assignmentId || !attachmentId) {
+    alert('Unable to extract assignmentId or attachmentId from the URL.');
+    return;
+  }
+
+  // Fetch media ID
+  try {
+    const api1 = `https://edpuzzle.com/api/v3/learning/assignments/${assignmentId}/attachments/${attachmentId}/content`;
+    const r1 = await fetch(api1, { credentials: 'include' });
+    if (!r1.ok) throw new Error(`Fetch failed (${r1.status}) for ${api1}`);
+    const d1 = await r1.json();
+    const mediaId = d1?.content?.data?.id;
+    if (!mediaId) throw new Error('Media ID not found in response.');
+
+    // Fetch media/questions
+    const api2 = `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
+    const r2 = await fetch(api2, { credentials: 'include' });
+    if (!r2.ok) throw new Error(`Fetch failed (${r2.status}) for ${api2}`);
+    const d2 = await r2.json();
+    const title = d2.title || 'Edpuzzle Answers';
+    const questions = Array.isArray(d2.questions) ? d2.questions : [];
+
+    // Open popup window
+    const popup = window.open('', '_blank', 'width=820,height=750,scrollbars=yes,resizable=yes');
+    if (!popup) {
+      alert('Popup blocked. Allow popups for this site and try again.');
+      return;
     }
 
-    // Step 2: Fetch media ID
-    const apiEndpoint1 = `https://edpuzzle.com/api/v3/learning/assignments/${assignmentId}/attachments/${attachmentId}/content`;
-    const response1 = await fetch(apiEndpoint1, { credentials: 'include' });
-    if (!response1.ok) {
-        alert(`Failed to fetch from ${apiEndpoint1}.`);
-        return;
+    // Build enhanced HTML with better UI
+    let contentHtml = `
+      <div class="header-container">
+        <h1>${title}</h1>
+    `;
+
+    if (d2.description?.blocks?.length) {
+      const descText = d2.description.blocks.map(b => b.text || '').join(' ');
+      contentHtml += `<p class="description">${descText}</p>`;
     }
-    const data1 = await response1.json();
-    const mediaId = data1?.content?.data?.id;
-    if (!mediaId) {
-        alert('Media ID not found.');
-        return;
-    }
+    
+    contentHtml += `</div>`;
 
-    // Step 3: Fetch questions
-    const apiEndpoint2 = `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
-    const response2 = await fetch(apiEndpoint2, {
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-    });
-    if (!response2.ok) {
-        alert(`Failed to fetch from ${apiEndpoint2}.`);
-        return;
-    }
-    const data2 = await response2.json();
-    const mediaContent = data2;
-    const questions = data2.questions || [];
+    if (questions.length === 0) {
+      contentHtml += `<div class="no-questions">No questions found.</div>`;
+    } else {
+      contentHtml += `<div class="questions-container">`;
+      for (let i = 0; i < questions.length; i++) {
+        const q = questions[i];
+        const timestamp = q.time ? formatTime(q.time) : '';
+        const qBodyHtml = q.body?.[0]?.html || '<em>Question unavailable</em>';
 
-    // --- Popup Setup ---
-    const popup = document.createElement('div');
-    popup.style.position = 'fixed';
-    popup.style.top = '100px';
-    popup.style.left = '100px';
-    popup.style.width = '600px';
-    popup.style.height = '500px';
-    popup.style.backgroundColor = 'black';
-    popup.style.color = 'white';
-    popup.style.border = '1px solid #444';
-    popup.style.borderRadius = '12px';
-    popup.style.boxShadow = '0 4px 20px rgba(0,0,0,0.6)';
-    popup.style.zIndex = '99999';
-    popup.style.overflow = 'hidden';
-    popup.style.display = 'flex';
-    popup.style.flexDirection = 'column';
-    popup.style.fontFamily = 'Arial, sans-serif';
+        contentHtml += `
+          <article class="question-card">
+            ${timestamp ? `<div class="timestamp">${timestamp}</div>` : ''}
+            <div class="question-content">
+              <p class="question-text">${qBodyHtml}</p>
+        `;
 
-    // --- Header Bar ---
-    const header = document.createElement('div');
-    header.style.background = '#111';
-    header.style.padding = '10px 15px';
-    header.style.cursor = 'move';
-    header.style.display = 'flex';
-    header.style.alignItems = 'center';
-    header.style.justifyContent = 'space-between';
-    header.style.borderBottom = '1px solid #333';
-
-    const title = document.createElement('span');
-    title.textContent = mediaContent.title || 'Edpuzzle Answers';
-    title.style.fontWeight = 'bold';
-    title.style.fontSize = '16px';
-    header.appendChild(title);
-
-    const controls = document.createElement('div');
-    controls.style.display = 'flex';
-    controls.style.gap = '8px';
-
-    const minimizeBtn = document.createElement('button');
-    minimizeBtn.textContent = '–';
-    minimizeBtn.style.background = '#333';
-    minimizeBtn.style.color = 'white';
-    minimizeBtn.style.border = 'none';
-    minimizeBtn.style.cursor = 'pointer';
-    minimizeBtn.style.fontSize = '16px';
-    minimizeBtn.style.width = '24px';
-    minimizeBtn.style.height = '24px';
-    minimizeBtn.style.borderRadius = '4px';
-
-    const closeBtn = document.createElement('button');
-    closeBtn.textContent = '✕';
-    closeBtn.style.background = '#333';
-    closeBtn.style.color = 'white';
-    closeBtn.style.border = 'none';
-    closeBtn.style.cursor = 'pointer';
-    closeBtn.style.fontSize = '16px';
-    closeBtn.style.width = '24px';
-    closeBtn.style.height = '24px';
-    closeBtn.style.borderRadius = '4px';
-
-    controls.appendChild(minimizeBtn);
-    controls.appendChild(closeBtn);
-    header.appendChild(controls);
-    popup.appendChild(header);
-
-    // --- Particle Background ---
-    const canvas = document.createElement('canvas');
-    canvas.style.position = 'absolute';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.zIndex = '-1';
-    popup.appendChild(canvas);
-
-    const ctx = canvas.getContext('2d');
-    let w, h, particles = [];
-    function resizeCanvas() {
-        w = canvas.width = popup.clientWidth;
-        h = canvas.height = popup.clientHeight;
-        particles = Array.from({ length: 40 }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            size: Math.random() * 2 + 1,
-        }));
-    }
-    resizeCanvas();
-    new ResizeObserver(resizeCanvas).observe(popup);
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = 'white';
-        particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0 || p.x > w) p.vx *= -1;
-            if (p.y < 0 || p.y > h) p.vy *= -1;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // --- Content Area ---
-    const content = document.createElement('div');
-    content.style.flex = '1';
-    content.style.overflowY = 'auto';
-    content.style.padding = '15px 20px';
-    popup.appendChild(content);
-
-    // Description
-    if (mediaContent.description?.blocks?.length) {
-        const desc = document.createElement('p');
-        desc.textContent = mediaContent.description.blocks.map(b => b.text).join(' ');
-        desc.style.textAlign = 'center';
-        desc.style.color = '#bbb';
-        desc.style.marginBottom = '15px';
-        content.appendChild(desc);
-    }
-
-    // Questions
-    questions.forEach(q => {
-        const box = document.createElement('div');
-        box.style.background = 'rgba(255,255,255,0.08)';
-        box.style.border = '1px solid rgba(255,255,255,0.2)';
-        box.style.borderRadius = '10px';
-        box.style.padding = '15px';
-        box.style.marginBottom = '15px';
-
-        if (q.time) {
-            const t = document.createElement('div');
-            t.textContent = `[${formatTime(q.time)}]`;
-            t.style.color = '#aaa';
-            t.style.fontSize = '13px';
-            t.style.marginBottom = '5px';
-            box.appendChild(t);
-        }
-
-        const qText = document.createElement('div');
-        qText.innerHTML = q.body?.[0]?.html || '<em>Question unavailable</em>';
-        qText.style.fontWeight = 'bold';
-        qText.style.textAlign = 'center';
-        qText.style.marginBottom = '10px';
-        box.appendChild(qText);
-
-        if (q.choices && Array.isArray(q.choices)) {
-            q.choices.forEach(c => {
-                const choice = document.createElement('div');
-                const isCorrect = c.isCorrect;
-                choice.innerHTML = c.body?.[0]?.html || '<em>No text</em>';
-                choice.style.padding = '8px 10px';
-                choice.style.borderRadius = '6px';
-                choice.style.margin = '5px 0';
-                choice.style.textAlign = 'center';
-                choice.style.background = isCorrect ? '#fff' : '#111';
-                choice.style.color = isCorrect ? '#000' : '#fff';
-                choice.style.border = isCorrect ? '2px solid #fff' : '1px solid #333';
-                box.appendChild(choice);
-            });
-        }
-
-        content.appendChild(box);
-    });
-
-    document.body.appendChild(popup);
-
-    // --- Draggable Logic ---
-    let isDragging = false;
-    let offsetX, offsetY;
-    header.addEventListener('mousedown', e => {
-        isDragging = true;
-        offsetX = e.clientX - popup.offsetLeft;
-        offsetY = e.clientY - popup.offsetTop;
-        popup.style.transition = 'none';
-    });
-    document.addEventListener('mousemove', e => {
-        if (isDragging) {
-            popup.style.left = e.clientX - offsetX + 'px';
-            popup.style.top = e.clientY - offsetY + 'px';
-        }
-    });
-    document.addEventListener('mouseup', () => isDragging = false);
-
-    // --- Minimize / Restore Logic ---
-    let minimized = false;
-    minimizeBtn.onclick = () => {
-        if (!minimized) {
-            content.style.display = 'none';
-            canvas.style.display = 'none';
-            popup.style.height = '40px';
-            minimizeBtn.textContent = '+';
-            minimized = true;
+        const choices = Array.isArray(q.choices) ? q.choices : [];
+        if (choices.length === 0) {
+          contentHtml += `<p class="no-choices">No choices available</p>`;
         } else {
-            content.style.display = 'block';
-            canvas.style.display = 'block';
-            popup.style.height = '500px';
-            minimizeBtn.textContent = '–';
-            minimized = false;
+          contentHtml += `<ol class="choices-list">`;
+          for (const c of choices) {
+            const isCorrect = !!c.isCorrect;
+            const choiceClass = isCorrect ? 'choice correct' : 'choice incorrect';
+            const choiceHtml = c.body?.[0]?.html || '';
+            contentHtml += `
+              <li class="${choiceClass}">
+                <div class="choice-content">${choiceHtml}</div>
+                ${isCorrect ? '<div class="correct-badge">✓</div>' : ''}
+              </li>`;
+          }
+          contentHtml += `</ol>`;
         }
-    };
 
-    closeBtn.onclick = () => popup.remove();
-
-    // Helper
-    function formatTime(seconds) {
-        const m = Math.floor(seconds / 60);
-        const s = Math.floor(seconds % 60);
-        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        contentHtml += `
+            </div>
+          </article>
+        `;
+      }
+      contentHtml += `</div>`;
     }
+
+    // Enhanced CSS with beautiful background effects
+    const fullHtml = `<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${title}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    padding: 20px 16px 40px 16px;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Animated background elements */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
+    animation: backgroundShift 20s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  @keyframes backgroundShift {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.05) rotate(1deg); }
+  }
+
+  /* Floating particles */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.2), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.1), transparent),
+      radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.2), transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: float 60s linear infinite;
+    z-index: -1;
+    opacity: 0.4;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px) translateX(0px); }
+    100% { transform: translateY(-200px) translateX(200px); }
+  }
+
+  .header-container {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.5px;
+  }
+
+  .description {
+    color: #b0b0b0;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .questions-container {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .question-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .question-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .question-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .timestamp {
+    color: #9a9a9a;
+    font-size: 13px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .question-text {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .choices-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .choice {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .choice:hover {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .choice.correct {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(21, 128, 61, 0.3));
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2);
+  }
+
+  .choice.incorrect {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .choice-content {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .correct-badge {
+    background: #22c55e;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 12px;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .no-choices, .no-questions {
+    color: #9a9a9a;
+    text-align: center;
+    font-style: italic;
+    padding: 40px 20px;
+    font-size: 16px;
+  }
+
+  /* Make sure inline html from Edpuzzle choices scales reasonably */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 8px auto;
+    border-radius: 8px;
+  }
+
+  table {
+    max-width: 100%;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin: 8px 0;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+</style>
+</head>
+<body>
+${contentHtml}
+</body>
+</html>`;
+
+    popup.document.open();
+    popup.document.write(fullHtml);
+    popup.document.close();
+
+  } catch (err) {
+    alert('Error: ' + (err && err.message ? err.message : String(err)));
+    console.error(err);
+  }
 })();
