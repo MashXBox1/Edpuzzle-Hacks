@@ -26,7 +26,7 @@
     if (!mediaId) throw new Error('Media ID not found in response.');
 
     // Fetch media/questions
-    const api2 = `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
+    const api2 = `https://edpuzzlefullcompletion.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
     const r2 = await fetch(api2, { credentials: 'include' });
     if (!r2.ok) throw new Error(`Fetch failed (${r2.status}) for ${api2}`);
     const d2 = await r2.json();
