@@ -16,6 +16,59 @@
     return;
   }
 
+  // Open first window (loading window)
+  const loadingWindow = window.open('', '_blank', 'width=400,height=200,scrollbars=no,resizable=no');
+  if (!loadingWindow) {
+    alert('Popup blocked. Allow popups for this site and try again.');
+    return;
+  }
+
+  // Show loading message in first window
+  loadingWindow.document.open();
+  loadingWindow.document.write(`
+    <!doctype html>
+    <html>
+    <head>
+      <title>Loading Edpuzzle Answers...</title>
+      <style>
+        body { 
+          background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+          color: white; 
+          font-family: Inter, system-ui, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+        .loading-content {
+          text-align: center;
+        }
+        .spinner {
+          border: 3px solid rgba(255,255,255,0.3);
+          border-radius: 50%;
+          border-top: 3px solid #667eea;
+          width: 40px;
+          height: 40px;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 20px;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <h2>Loading Edpuzzle Answers...</h2>
+      </div>
+    </body>
+    </html>
+  `);
+  loadingWindow.document.close();
+
   // Fetch media ID
   try {
     const api1 = `https://edpuzzle.com/api/v3/learning/assignments/${assignmentId}/attachments/${attachmentId}/content`;
@@ -32,13 +85,6 @@
     const d2 = await r2.json();
     const title = d2.title || 'Edpuzzle Answers';
     const questions = Array.isArray(d2.questions) ? d2.questions : [];
-
-    // Open popup window
-    const popup = window.open('', '_blank', 'width=820,height=750,scrollbars=yes,resizable=yes');
-    if (!popup) {
-      alert('Popup blocked. Allow popups for this site and try again.');
-      return;
-    }
 
     // Build enhanced HTML with better UI
     let contentHtml = `
@@ -367,11 +413,27 @@ ${contentHtml}
 </body>
 </html>`;
 
-    popup.document.open();
-    popup.document.write(fullHtml);
-    popup.document.close();
+    // Open second window with the actual content
+    const contentWindow = window.open('', '_blank', 'width=820,height=750,scrollbars=yes,resizable=yes');
+    if (!contentWindow) {
+      loadingWindow.close();
+      alert('Second popup blocked. Allow popups for this site and try again.');
+      return;
+    }
+
+    // Write content to second window
+    contentWindow.document.open();
+    contentWindow.document.write(fullHtml);
+    contentWindow.document.close();
+
+    // Close the first loading window
+    loadingWindow.close();
 
   } catch (err) {
+    // Close loading window on error too
+    if (loadingWindow && !loadingWindow.closed) {
+      loadingWindow.close();
+    }
     alert('Error: ' + (err && err.message ? err.message : String(err)));
     console.error(err);
   }
