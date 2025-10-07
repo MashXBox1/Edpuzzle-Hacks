@@ -32,27 +32,24 @@
     }
 
     // Step 4: Fetch data from the second API endpoint (to get the questions and answers)
-    const apiEndpoint2 = `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
-    const response2 = await fetch(apiEndpoint2, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        credentials: 'include', // Include HTTP-only cookies for edpuzzlefetch
-        mode: 'cors', // Ensure cross-origin requests are allowed
-    });
+    const response = await fetch(
+        `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`,
+        { 
+            credentials: 'include'  // Sends cookies/session data
+        }
+    );
 
-    if (!response2.ok) {
-        alert(`Failed to fetch data from ${apiEndpoint2}. Status: ${response2.status}`);
+    if (!response.ok) {
+        alert(`Failed to fetch data from edpuzzlefetch. Status: ${response.status}`);
         return;
     }
 
-    const data2 = await response2.json();
+    const data2 = await response.json();
 
     // Debug: Log the raw JSON response from the second API call
     console.log('Raw JSON Response (Second API Call - Questions and Answers):', data2);
 
-    // Step 5: Process the media content and questions
+    // Step 5: Parse and format the JSON data
     const mediaContent = data2; // Use the second API for media title/description
     const questions = data2.questions || []; // Use the second API for questions and answers
 
@@ -140,30 +137,6 @@
 
         popup.appendChild(questionDiv);
     });
-
-    // Add raw JSON section
-    const jsonSection = document.createElement('div');
-    jsonSection.style.marginTop = '20px';
-    jsonSection.style.borderTop = '1px solid #ccc';
-    jsonSection.style.paddingTop = '20px';
-
-    const jsonTitle = document.createElement('h3');
-    jsonTitle.textContent = 'Raw JSON Data:';
-    jsonTitle.style.marginBottom = '10px';
-    jsonSection.appendChild(jsonTitle);
-
-    const jsonPre = document.createElement('pre');
-    jsonPre.style.whiteSpace = 'pre-wrap';
-    jsonPre.style.wordWrap = 'break-word';
-    jsonPre.style.backgroundColor = '#f9f9f9';
-    jsonPre.style.padding = '10px';
-    jsonPre.style.border = '1px solid #ddd';
-    jsonPre.style.borderRadius = '4px';
-    jsonPre.style.fontSize = '12px';
-    jsonPre.textContent = JSON.stringify(data2, null, 2); // Pretty-print the JSON
-    jsonSection.appendChild(jsonPre);
-
-    popup.appendChild(jsonSection);
 
     // Add close button
     const closeButton = document.createElement('button');
