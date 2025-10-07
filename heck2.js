@@ -91,6 +91,11 @@
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        .status {
+          margin-top: 10px;
+          font-size: 14px;
+          color: #b0b0b0;
+        }
       </style>
     </head>
     <body>
@@ -100,6 +105,7 @@
         <div class="loading" id="loading">
           <div class="spinner"></div>
           <p>Loading answers...</p>
+          <div class="status" id="status"></div>
         </div>
         <div id="answersContainer" style="display: none;"></div>
       </div>
@@ -108,12 +114,14 @@
         async function generateAnswers() {
           const btn = document.querySelector('.generate-btn');
           const loading = document.getElementById('loading');
+          const status = document.getElementById('status');
           const answersContainer = document.getElementById('answersContainer');
           
           // Disable button and show loading
           btn.disabled = true;
           btn.textContent = 'Generating...';
           loading.style.display = 'block';
+          status.textContent = 'Fetching data...';
           
           try {
             // This function will be called from the parent window
@@ -127,16 +135,73 @@
             btn.textContent = 'Generate Answers';
           }
         }
+
+        function updateStatus(message) {
+          const status = document.getElementById('status');
+          if (status) {
+            status.textContent = message;
+          }
+        }
       </script>
     </body>
     </html>
   `);
   blankWindow.document.close();
 
+  // Function to fetch media data with retry logic for missing correct answers
+  async function fetchMediaDataWithRetry(mediaId, maxRetries = 3) {
+    let retryCount = 0;
+    
+    while (retryCount < maxRetries) {
+      try {
+        blankWindow.updateStatus(`Fetching questions... (Attempt ${retryCount + 1}/${maxRetries})`);
+        
+        const api2 = `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
+        const r2 = await fetch(api2, { credentials: 'include' });
+        if (!r2.ok) throw new Error(`Fetch failed (${r2.status}) for ${api2}`);
+        const d2 = await r2.json();
+        
+        const questions = Array.isArray(d2.questions) ? d2.questions : [];
+        
+        // Check if any question has correct answers
+        let hasCorrectAnswers = false;
+        for (const question of questions) {
+          const choices = Array.isArray(question.choices) ? question.choices : [];
+          for (const choice of choices) {
+            if (choice.isCorrect === true) {
+              hasCorrectAnswers = true;
+              break;
+            }
+          }
+          if (hasCorrectAnswers) break;
+        }
+        
+        if (hasCorrectAnswers || questions.length === 0) {
+          blankWindow.updateStatus(`Found ${questions.length} questions with answers`);
+          return d2;
+        } else {
+          blankWindow.updateStatus(`No correct answers found, retrying... (${retryCount + 1}/${maxRetries})`);
+          retryCount++;
+          
+          // Wait before retrying (exponential backoff)
+          await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+        }
+      } catch (error) {
+        retryCount++;
+        blankWindow.updateStatus(`Error: ${error.message}, retrying... (${retryCount}/${maxRetries})`);
+        if (retryCount >= maxRetries) throw error;
+        await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+      }
+    }
+    
+    throw new Error(`No correct answers found after ${maxRetries} attempts`);
+  }
+
   // Define the function that will be called when the button is pressed
   blankWindow.generateAnswersContent = async function() {
     try {
       // Fetch media ID
+      blankWindow.updateStatus('Getting media information...');
       const api1 = `https://edpuzzle.com/api/v3/learning/assignments/${assignmentId}/attachments/${attachmentId}/content`;
       const r1 = await fetch(api1, { credentials: 'include' });
       if (!r1.ok) throw new Error(`Fetch failed (${r1.status}) for ${api1}`);
@@ -144,11 +209,10 @@
       const mediaId = d1?.content?.data?.id;
       if (!mediaId) throw new Error('Media ID not found in response.');
 
-      // Fetch media/questions
-      const api2 = `https://edpuzzlefetch.edpuzzledestroyer.workers.dev/api/v3/media/${mediaId}`;
-      const r2 = await fetch(api2, { credentials: 'include' });
-      if (!r2.ok) throw new Error(`Fetch failed (${r2.status}) for ${api2}`);
-      const d2 = await r2.json();
+      // Fetch media/questions with retry logic
+      blankWindow.updateStatus('Media ID found, fetching questions...');
+      const d2 = await fetchMediaDataWithRetry(mediaId, 5); // 5 retries max
+      
       const title = d2.title || 'Edpuzzle Answers';
       const questions = Array.isArray(d2.questions) ? d2.questions : [];
 
@@ -188,8 +252,11 @@
             contentHtml += `<p class="no-choices">No choices available</p>`;
           } else {
             contentHtml += `<ol class="choices-list">`;
+            let hasCorrectAnswer = false;
+            
             for (const c of choices) {
               const isCorrect = !!c.isCorrect;
+              if (isCorrect) hasCorrectAnswer = true;
               const choiceClass = isCorrect ? 'choice correct' : 'choice incorrect';
               const choiceHtml = c.body?.[0]?.html || '';
               contentHtml += `
@@ -198,7 +265,11 @@
                   ${isCorrect ? '<div class="correct-badge">✓</div>' : ''}
                 </li>`;
             }
-            contentHtml += `</ol>`;
+            
+            // If no correct answers were found in this question, show a warning
+            if (!hasCorrectAnswer && choices.length > 0) {
+              contentHtml += `<p class="no-choices" style="color: #ff6b6b; margin-top: 10px;">⚠️ No correct answer identified for this question</p>`;
+            }
           }
 
           contentHtml += `
